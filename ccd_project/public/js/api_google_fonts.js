@@ -25,6 +25,7 @@ function getGoogleFonts() {
         getSubsetFont(json);
         getFilesFont(json);
         getFileRandomFont();
+        getCategoryRandomFont();
     });
 }
 var arrayFamilies = [];
@@ -70,29 +71,36 @@ function getFilesFont(json1) {
 var fileRandomFont;
 function getFileRandomFont(){
     fileRandomFont = arrayFilesFonts[randomIndex].regular;
+    console.log(randomIndex);
     console.log('choosed font file:', fileRandomFont);
     localStorage.setItem("fileRandomFontStorage", fileRandomFont);
     return fileRandomFont;
 }
 
-
+var arrayCategories = [];
 /*Categorias-------------------------*/
 function getCategoriesFont(json1) {
     /*Criei um array com todas as categorias*/
-    var arrayCategories = [];
     json1.items.forEach(function (font, i) {
         //console.log(font.category);
         arrayCategories [i] = font.category;
     });
     //COMENTEI console.log("Categories");
-    //COMENTEI console.log(arrayCategories);
-
+     console.log(arrayCategories);
+     return arrayCategories;
     /*Informa-me quais as diferentes categorias, sem repetições*/
-    var uniqueCategories = arrayCategories.filter(function (value, index, self) {
+    /*var uniqueCategories = arrayCategories.filter(function (value, index, self) {
         return self.indexOf(value) === index;
-    });
+    });*/
     //COMENTEI console.log("Unique Categories");
     //COMENTEI console.log(uniqueCategories);
+}
+
+var categoryRandomFont;
+function getCategoryRandomFont(){
+    categoryRandomFont = arrayCategories[randomIndex];
+    console.log(categoryRandomFont);
+    return categoryRandomFont;
 }
 
 

@@ -108,7 +108,7 @@ function loadInfo () {
 //"canvas"/div onde irá ser desenhado o icon + texto
 function drawIcon(url){
     let boxArea = createDiv();
-    let icon = createImg(url);
+   // let icon = createImg(url);
     let text = createSpan(input.value());
 
     boxArea.class('genBox');
@@ -118,9 +118,9 @@ function drawIcon(url){
     boxArea.style('display', 'inline-block');
     boxArea.style('margin', '3% 3% 3% 3%');
 
-    icon.style('filter', 'saturate(300%)');
-    icon.style('width', '100%');
-    icon.style('height', 'auto');
+  //  icon.style('filter', 'saturate(300%)');
+  //  icon.style('width', '100%');
+   // icon.style('height', 'auto');
 
     xText = random(0, boxArea.width);
     yText = random(10, boxArea.height);
@@ -130,11 +130,16 @@ function drawIcon(url){
     // text.style('font-family', loadFont(localStorage.getItem("fileRandomFontStorage")));
     // head.appendChild(document.createElement('link').setAttribute('href', fileRandomFont));
 
-    //Falta a categoria da fonte
-    text.style('font-family', randomFont + ', ' + randomFont.category);
+
+    let randomFontF = getRandomFamilyFont();
+    console.log("randomFontF " + randomFontF);
+    let randomFontCategory = getCategoryRandomFont();
+    console.log("randomFontCategory " + randomFontCategory);
+    text.style('font-family', randomFontF +', ' + randomFontCategory);
+    text.style('font-weight', '400');
 
     text.parent(boxArea);
-    icon.parent(boxArea);
+  //  icon.parent(boxArea);
     boxArea.parent(container);
 
 }
