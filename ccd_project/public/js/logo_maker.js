@@ -16,7 +16,7 @@ let icon;
 let button;
 let sideDiv;
 let container;
-let inputValue = 'car';
+let inputValue = 'flower';
 
 let valueExport = false;
 
@@ -108,8 +108,8 @@ function loadInfo () {
 //"canvas"/div onde irá ser desenhado o icon + texto
 function drawIcon(url){
     let boxArea = createDiv();
-   // let icon = createImg(url);
-    let text = createSpan(input.value());
+    let icon = createImg(url);
+    let text = createP(input.value());
 
     boxArea.class('genBox');
     boxArea.style('width', '100px');
@@ -118,9 +118,24 @@ function drawIcon(url){
     boxArea.style('display', 'inline-block');
     boxArea.style('margin', '3% 3% 3% 3%');
 
-  //  icon.style('filter', 'saturate(300%)');
-  //  icon.style('width', '100%');
-   // icon.style('height', 'auto');
+   // icon.style('filter', 'saturate(300%)');
+    icon.style('filter', 'invert(0.5) url()');
+    icon.style('width', '100%');
+    icon.style('height', 'auto');
+
+
+    // blur()
+    // brightness()
+    // contrast()
+    // drop-shadow()
+    // grayscale()
+    // hue-rotate()
+    // invert()
+    // opacity()
+    // saturate()
+    // sepia()
+    // url() – for applying SVG filters
+    // custom() – “coming soon”
 
     xText = random(0, boxArea.width);
     yText = random(10, boxArea.height);
@@ -135,11 +150,15 @@ function drawIcon(url){
     console.log("randomFontF " + randomFontF);
     let randomFontCategory = getCategoryRandomFont();
     console.log("randomFontCategory " + randomFontCategory);
-    text.style('font-family', randomFontF +', ' + randomFontCategory);
+    text.style('font-family', "'" + randomFontF + "'" + ', ' + randomFontCategory);
+    console.log('font-family', "'" + randomFontF + "'" + ', ' + randomFontCategory);
     text.style('font-weight', '400');
+    text.style('font-style', 'normal'); //italic
+
+    text.style('font-size', '16px');
 
     text.parent(boxArea);
-  //  icon.parent(boxArea);
+    icon.parent(boxArea);
     boxArea.parent(container);
 
 }
