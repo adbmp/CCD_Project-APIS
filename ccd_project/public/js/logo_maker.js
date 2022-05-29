@@ -14,8 +14,10 @@ let PickedColor;
 //logos 
 let icon; 
 let button;
+let buttonExport;
 let sideDiv;
 let container;
+let containerC;
 let inputValue = 'flower';
 
 let valueExport = false;
@@ -46,21 +48,14 @@ function setup() {
     //     textSize = 5;
     // }
 
-    //Container do conjunto de logos criados
-    container = createDiv();
-    container.style('width', '60%');
-    container.style('height', '100%');
-    container.style('position', 'absolute');
-    container.style('left', '35%');
-    container.style('top', '7.5%');
-    
-    //Barra lateral 
+    //Barra lateral
     sideDiv = createDiv();
     sideDiv.id("settings");
-    sideDiv.style('width', '20%');
-    sideDiv.style('height', '100%');
+    sideDiv.style('width', '20vw');
+    sideDiv.style('height', '100vh');
     sideDiv.style('background-color', '#ffe61d');
     sideDiv.style('position', 'absolute');
+    //sideDiv.style('display', 'inline-block');
     sideDiv.style('top', '0');
     sideDiv.style('left', '0');
 
@@ -78,12 +73,37 @@ function setup() {
 
     PickedColor = createColorPicker("black");
 
+
+    //Container do conjunto de logos criados
+    container = createDiv();
+    container.style('width', '80vw');
+    container.style('height', '100vh');
+    container.style('position', 'absolute');
+    //container.style('display', 'inline-block');
+    container.style('left', '20vw');
+    container.style('top', '0');
+
+    containerC = createDiv();
+    containerC.style('width', '60vw');
+    containerC.style('height', '100vh');
+    containerC.style('position', 'relative');
+    containerC.style('left', '50%');
+    containerC.style('transform', 'translateX(-50%)');
+
     input.parent(sideDiv);
     button.parent(sideDiv); 
     PickedColor.parent(sideDiv);
+    containerC.parent(container);
+
+    //let main = document.getElementsByTagName("main")[0];
+    //sideDiv.parent(main);
+    //container.parent(main);
+
+    selectIcon(); //ISTO NÃO PERTENCE A ESTA LINHA. MUDAR DE SÍTIO
 }
 
 function draw() {
+
 }
 
 
@@ -104,7 +124,6 @@ function loadInfo () {
     })
 }
 
-
 //"canvas"/div onde irá ser desenhado o icon + texto
 function drawIcon(url){
     let boxArea = createDiv();
@@ -116,13 +135,13 @@ function drawIcon(url){
     boxArea.style('height', '100px');
     boxArea.style('position', 'relative');
     boxArea.style('display', 'inline-block');
-    boxArea.style('margin', '3% 3% 3% 3%');
+    boxArea.style('margin', '4%');
+    boxArea.mousePressed(selectIcon);
 
    // icon.style('filter', 'saturate(300%)');
     icon.style('filter', 'invert(0.5) url()');
     icon.style('width', '100%');
     icon.style('height', 'auto');
-
 
     // blur()
     // brightness()
@@ -140,11 +159,9 @@ function drawIcon(url){
     xText = random(0, boxArea.width);
     yText = random(10, boxArea.height);
 
-    
     text.position(xText, yText);
     // text.style('font-family', loadFont(localStorage.getItem("fileRandomFontStorage")));
     // head.appendChild(document.createElement('link').setAttribute('href', fileRandomFont));
-
 
     let randomFontF = getRandomFamilyFont();
     console.log("randomFontF " + randomFontF);
@@ -154,12 +171,31 @@ function drawIcon(url){
     console.log('font-family', "'" + randomFontF + "'" + ', ' + randomFontCategory);
     text.style('font-weight', '400');
     text.style('font-style', 'normal'); //italic
-
     text.style('font-size', '16px');
+
+    buttonExport = createButton('Export');
+    buttonExport.id("export");
+    buttonExport.value("Submit");
+    buttonExport.mousePressed(exportResult);
+    buttonExport.style('position', 'absolute');
+    buttonExport.style('right', '0');
+    buttonExport.style('bottom', '0');
 
     text.parent(boxArea);
     icon.parent(boxArea);
-    boxArea.parent(container);
+    buttonExport.parent(container);
+    boxArea.parent(containerC);
+}
+
+function selectIcon(){
+    let iconSelected = document.querySelector('.genBox');
+
+    //iconSelected.addEventListener('mouseover', function (){
+        iconSelected.style('border', '1px solid green');
+    //})
+}
+
+function exportResult(){
 
 }
 
