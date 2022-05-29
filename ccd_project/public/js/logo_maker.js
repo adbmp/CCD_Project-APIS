@@ -12,6 +12,11 @@ let textInput;
 let input;
 let PickedColor;
 
+let imageCircle;
+let saturateCircle = 0;
+let brightnessCircle = 0;
+let hueRotateCircle = 0;
+
 //logos 
 let icon; 
 let button;
@@ -73,9 +78,29 @@ function setup() {
     input.style('margin', '0 0 10% 2%');
     inputValue = input.value();
 
-    PickedColor = createColorPicker("black");
+    PickedColor = createColorPicker("#D40C3E");
     PickedColor.style('margin', '0 0 10% 2%');
+
+
+    //https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_rangeslider
+    //INPUT SLIDE SATURATION
+
+    //INPUT SLIDE BRIGHTNESS
+
+    //INPUT SLIDE HUE
     
+    imageCircle = createImg(
+        'images/circle.png',
+        'circle1'
+    );
+    imageCircle.style('margin', '0 0 10% 2%');
+    saturateCircle = 0; //MUDAR DE ACORDO COM INPUT
+    brightnessCircle = 0; //MUDAR DE ACORDO COM INPUT
+    hueRotateCircle = 0; //MUDAR DE ACORDO COM INPUT
+
+    imageCircle.style('filter', 'invert(0.5) sepia(100%) saturate('+saturateCircle+') hue-rotate('+hueRotateCircle+'deg) brightness('+brightnessCircle+')');
+
+
     button = createButton('Generate');
     button.id("submit");
     button.value("Submit");
@@ -107,6 +132,7 @@ function setup() {
     textInput.parent(sideDiv);
     input.parent(sideDiv);
     PickedColor.parent(sideDiv);
+    imageCircle.parent(sideDiv);
     button.parent(sideDiv);
     containerC.parent(container);
 
@@ -114,7 +140,7 @@ function setup() {
     //sideDiv.parent(main);
     //container.parent(main);
 
-    selectIcon(); //ISTO NÃO PERTENCE A ESTA LINHA. MUDAR DE SÍTIO
+    //selectIcon(); //ISTO NÃO PERTENCE A ESTA LINHA. MUDAR DE SÍTIO
 }
 
 function draw() {
@@ -151,10 +177,21 @@ function drawIcon(url){
     boxArea.style('position', 'relative');
     boxArea.style('display', 'inline-block');
     boxArea.style('margin', '4%');
-    boxArea.mousePressed(selectIcon);
+    //boxArea.mousePressed(selectIcon);
 
-   // icon.style('filter', 'saturate(300%)');
-    icon.style('filter', 'invert(0.5) url()');
+
+
+    colorMode(HSB, 255);
+    console.log(PickedColor.color());
+    let huePickedColor = hue(PickedColor.color());
+    let saturationPickedColor = saturation(PickedColor.color());
+    let brightnessPickedColor = brightness(PickedColor.color());
+    console.log(huePickedColor);
+    console.log(saturationPickedColor);
+    console.log(brightnessPickedColor);
+
+    icon.style('filter', 'invert(0.5) sepia(100%) saturate('+saturationPickedColor/100+') hue-rotate('+map(huePickedColor,0,255,0,360)+'deg) brightness('+brightnessPickedColor/100+')');
+
     icon.style('width', '100%');
     icon.style('height', 'auto');
 
@@ -208,11 +245,27 @@ function drawIcon(url){
 }
 
 function selectIcon(){
-    let iconSelected = document.querySelector('.genBox');
+   // let iconSelected = document.querySelector('.genBox');
 
     //iconSelected.addEventListener('mouseover', function (){
-        iconSelected.style('border', '1px solid green');
+       // iconSelected.style('border', '1px solid green');
     //})
+}
+
+function colorImageBlue(){
+    icon.style('filter', 'invert(0.5) sepia(100%) saturate(3) hue-rotate(180deg) url()');
+}
+function colorImageOrange(){
+    icon.style('filter', 'invert(0.5) sepia(100%) saturate(3) url()');
+}
+function colorImageGreen() {
+    icon.style('filter', 'invert(0.5) sepia(100%) saturate(3) hue-rotate(50deg) url()');
+}
+function colorImagePurple() {
+    icon.style('filter', 'invert(0.5) sepia(100%) saturate(3) hue-rotate(210deg) url()');
+}
+function colorImagePink() {
+    icon.style('filter', 'invert(0.5) sepia(100%) saturate(3) hue-rotate(260deg) url()');
 }
 
 function exportResult(){
