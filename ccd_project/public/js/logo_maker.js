@@ -7,7 +7,8 @@ var textW;
 var xText;
 var yText;
 
-//input 
+//input
+let textInput;
 let input;
 let PickedColor;
 
@@ -59,20 +60,33 @@ function setup() {
     sideDiv.style('top', '0');
     sideDiv.style('left', '0');
 
+    textInput = createP("Nome da marca:");
+    textInput.style('display', 'block');
+    textInput.style('margin', '2% 0 2% 2%');
+
     input = createInput();
     input.id("BrandInput");
     input.style('border', 'none');
     input.style('border-bottom', '2px solid black');
     input.style('background-color', 'transparent');
+    input.style('display', 'block');
+    input.style('margin', '0 0 10% 2%');
     inputValue = input.value();
+
+    PickedColor = createColorPicker("black");
+    PickedColor.style('margin', '0 0 10% 2%');
     
     button = createButton('Generate');
     button.id("submit");
     button.value("Submit");
     button.mousePressed(loadInfo);
-
-    PickedColor = createColorPicker("black");
-
+    button.style('display','block');
+    button.style('margin','2%');
+    button.style('padding','10px');
+    button.style('backgroundColor','#F4F4F4');
+    button.style('shadow','0 2px 2px rgba(0, 0, 0, 0.25)');
+    button.style('border','none');
+    button.style('cursor','pointer');
 
     //Container do conjunto de logos criados
     container = createDiv();
@@ -90,9 +104,10 @@ function setup() {
     containerC.style('left', '50%');
     containerC.style('transform', 'translateX(-50%)');
 
+    textInput.parent(sideDiv);
     input.parent(sideDiv);
-    button.parent(sideDiv); 
     PickedColor.parent(sideDiv);
+    button.parent(sideDiv);
     containerC.parent(container);
 
     //let main = document.getElementsByTagName("main")[0];
@@ -178,8 +193,13 @@ function drawIcon(url){
     buttonExport.value("Submit");
     buttonExport.mousePressed(exportResult);
     buttonExport.style('position', 'absolute');
-    buttonExport.style('right', '0');
-    buttonExport.style('bottom', '0');
+    buttonExport.style('right', '20px');
+    buttonExport.style('bottom', '20px');
+    buttonExport.style('padding','10px');
+    buttonExport.style('backgroundColor','#F4F4F4');
+    buttonExport.style('shadow','0 2px 2px rgba(0, 0, 0, 0.25)');
+    buttonExport.style('border','none');
+    buttonExport.style('cursor','pointer');
 
     text.parent(boxArea);
     icon.parent(boxArea);
