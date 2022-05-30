@@ -52,6 +52,7 @@ function setup() {
     sideDiv.style('width', '20vw');
     sideDiv.style('height', '100vh');
     sideDiv.style('background-color', '#ffe61d');
+    //sideDiv.style('border-right', '1px solid black');
     sideDiv.style('position', 'absolute');
     //sideDiv.style('display', 'inline-block');
     sideDiv.style('top', '0');
@@ -59,7 +60,7 @@ function setup() {
 
     textInput = createP("Nome da marca:");
     textInput.style('display', 'block');
-    textInput.style('margin', '2% 0 2% 2%');
+    textInput.style('margin', '5% 0 2% 5%');
 
     input = createInput();
     input.id("BrandInput");
@@ -67,7 +68,7 @@ function setup() {
     input.style('border-bottom', '2px solid black');
     input.style('background-color', 'transparent');
     input.style('display', 'block');
-    input.style('margin', '0 0 10% 2%');
+    input.style('margin', '0 0 10% 5%');
     inputValue = input.value();
 
     //PickedColor = createColorPicker("#D40C3E");
@@ -75,36 +76,48 @@ function setup() {
 
     //INPUT SLIDE SATURATION
     textInputSaturation = createP("Saturation:");
+    textInputSaturation.style('font-size', '15px');
     textInputSaturation.style('display', 'block');
-    textInputSaturation.style('margin', '2% 0 2% 2%');
+    textInputSaturation.style('margin', '2% 0 2% 5%');
     inputSaturation = createSlider(0, 255, 0);
+    inputSaturation.style('display', 'block');
+    inputSaturation.style('margin', '2% 0 10% 5%');
     //createSlider(min, max, [value], [step])
 
     //INPUT SLIDE BRIGHTNESS
     textInputBrightness = createP("Brightness:");
+    textInputBrightness.style('font-size', '15px');
     textInputBrightness.style('display', 'block');
-    textInputBrightness.style('margin', '2% 0 2% 2%');
+    textInputBrightness.style('margin', '2% 0 2% 5%');
     inputBrightness = createSlider(0, 255, 0);
+    inputBrightness.style('display', 'block');
+    inputBrightness.style('margin', '2% 0 10% 5%');
 
     //INPUT SLIDE HUE
     textInputHue = createP("Hue:");
+    textInputHue.style('font-size', '15px');
     textInputHue.style('display', 'block');
-    textInputHue.style('margin', '2% 0 2% 2%');
+    textInputHue.style('margin', '2% 0 2% 5%');
     inputHue = createSlider(0, 360, 0);
+    inputHue.style('display', 'block');
+    inputHue.style('margin', '2% 0 10% 5%');
 
     imageCircle = createImg(
         'images/circle.png',
         'circle1'
     );
 
-    imageCircle.style('margin', '0 0 10% 2%');
+    imageCircle.style('margin', '10% 0 10% 5%');
+    imageCircle.style('display', 'block');
+    imageCircle.style('width', '50px');
+    imageCircle.style('height', 'auto');
 
     button = createButton('Generate');
     button.id("submit");
     button.value("Submit");
     button.mousePressed(loadInfo);
     button.style('display', 'block');
-    button.style('margin', '2%');
+    button.style('margin', '5%');
     button.style('padding', '10px');
     button.style('backgroundColor', '#F4F4F4');
     button.style('shadow', '0 2px 2px rgba(0, 0, 0, 0.25)');
@@ -141,11 +154,17 @@ function setup() {
     //PickedColor.parent(sideDiv);
     button.parent(sideDiv);
     containerC.parent(container);
-
-    //selectIcon(); //ISTO NÃO PERTENCE A ESTA LINHA. MUDAR DE SÍTIO
 }
 
 function draw() {
+    /*
+        let linkHead = document.createElement('link');
+        linkHead.type = 'text/css';
+        linkHead.rel = 'stylesheet';
+        document.getElementById('linkHead').appendChild(link);
+        linkHead.href = 'http://fonts.googleapis.com/css?family=' + randomFontF;
+    */
+
     //console.log(inputSaturation.value());
     saturateCircle = inputSaturation.value();
     //console.log(inputBrightness.value());
@@ -154,6 +173,8 @@ function draw() {
     hueRotateCircle = inputHue.value();
 
     imageCircle.style('filter', 'invert(0.5) sepia(100%) saturate(' + saturateCircle + '%) hue-rotate(' + hueRotateCircle + 'deg) brightness(' + brightnessCircle + '%)');
+
+
 }
 
 module.exports = inputValue;
@@ -186,7 +207,6 @@ function drawIcon(url) {
     boxArea.style('display', 'inline-block');
     boxArea.style('margin', '4%');
     boxArea.style('background-color', 'white');
-    //boxArea.mousePressed(selectIcon);
 
     colorMode(HSB, 255);
     //console.log(PickedColor.color());
@@ -222,8 +242,9 @@ function drawIcon(url) {
     // url() – for applying SVG filters
     // custom() – “coming soon”
 
+    let textSize = 16;
     let textW = textWidth(text);
-    let textH = 0 /*textAscent(text)*/;
+    let textH = textSize;
     xText = random(0, boxArea.width - textW);
     yText = random(10, boxArea.height - textH);
     text.position(xText, yText);
@@ -238,12 +259,11 @@ function drawIcon(url) {
     console.log('src', 'url(' + getFileRandomFont() + ') format(ttf)');
     text.style('font-weight', '400');
     text.style('font-style', 'normal'); //italic
-    text.style('font-size', '16px');
+    text.style('font-size', textSize + 'px');
 
     buttonExport = createButton('Export');
     buttonExport.id("export");
     buttonExport.value("Submit");
-    buttonExport.mousePressed(exportResult);
     buttonExport.style('position', 'absolute');
     buttonExport.style('right', '20px');
     buttonExport.style('bottom', '20px');
@@ -257,17 +277,31 @@ function drawIcon(url) {
     text.parent(boxArea);
     buttonExport.parent(container);
     boxArea.parent(containerC);
+
+    //SELECIONAR DIV CLICADA----------------------------------------------------
+    let iconSelect = document.querySelectorAll('.genBox');
+    let nClick = 0;
+    for (let i = 0; i < iconSelect.length; i++) {
+        iconSelect[i].addEventListener('click', function () {
+            //iconSelect[i].style.border = '2px solid green';
+            iconSelect[i].classList.add("divClicada");
+            nClick++
+            if(nClick===2){
+                //iconSelect[i].style.border = 'none';
+                iconSelect[i].classList.remove("divClicada");
+                nClick = 0;
+            }
+        })
+    }
+    //EXPORTAR DIV CLICADA----------------------------------------------------
+    /*let divClicada = document.querySelectorAll('.divClicada');
+    for (let j = 0; j < divClicada.length; j++) {
+        buttonExport.addEventListener('click', function () {
+           //http://html2canvas.hertzen.com/
+           //divClicada[i]
+        })
+    }*/
+
 }
 
-function selectIcon() {
-   /* let iconSelected = document.querySelector('.genBox');
-
-    iconSelected.addEventListener('mouseover', function () {
-        iconSelected.style('border', '1px solid green');
-    })*/
-}
-
-function exportResult() {
-
-}
 

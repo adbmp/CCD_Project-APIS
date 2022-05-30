@@ -5,7 +5,11 @@ body{
     font-weight: 300;
     display: flex;
     flex-direction: row;
-/*overflow: hidden;*/
+    background-color: #FFF5D3
+    /*overflow: hidden;*/
+}
+.divClicada{
+    border: 2px solid green;
 }
 
 /* #settings{
