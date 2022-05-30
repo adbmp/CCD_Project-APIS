@@ -10,7 +10,13 @@ var yText;
 //input
 let textInput;
 let input;
-let PickedColor;
+//let PickedColor;
+let textInputSaturation;
+let inputSaturation;
+let textInputBrightness;
+let inputBrightness;
+let textInputHue;
+let inputHue;
 
 let imageCircle;
 let saturateCircle = 0;
@@ -78,28 +84,34 @@ function setup() {
     input.style('margin', '0 0 10% 2%');
     inputValue = input.value();
 
-    PickedColor = createColorPicker("#D40C3E");
-    PickedColor.style('margin', '0 0 10% 2%');
+    //PickedColor = createColorPicker("#D40C3E");
+    //PickedColor.style('margin', '0 0 10% 2%');
 
-
-    //https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_rangeslider
     //INPUT SLIDE SATURATION
+    textInputSaturation = createP("Saturation:");
+    textInputSaturation.style('display', 'block');
+    textInputSaturation.style('margin', '2% 0 2% 2%');
+    inputSaturation = createSlider(0, 255, 0);
+    //createSlider(min, max, [value], [step])
 
     //INPUT SLIDE BRIGHTNESS
+    textInputBrightness = createP("Brightness:");
+    textInputBrightness.style('display', 'block');
+    textInputBrightness.style('margin', '2% 0 2% 2%');
+    inputBrightness = createSlider(0, 255, 0);
 
     //INPUT SLIDE HUE
-    
+    textInputHue = createP("Hue:");
+    textInputHue.style('display', 'block');
+    textInputHue.style('margin', '2% 0 2% 2%');
+    inputHue = createSlider(0, 360, 0);
+
     imageCircle = createImg(
         'images/circle.png',
         'circle1'
     );
+
     imageCircle.style('margin', '0 0 10% 2%');
-    saturateCircle = 0; //MUDAR DE ACORDO COM INPUT
-    brightnessCircle = 0; //MUDAR DE ACORDO COM INPUT
-    hueRotateCircle = 0; //MUDAR DE ACORDO COM INPUT
-
-    imageCircle.style('filter', 'invert(0.5) sepia(100%) saturate('+saturateCircle+') hue-rotate('+hueRotateCircle+'deg) brightness('+brightnessCircle+')');
-
 
     button = createButton('Generate');
     button.id("submit");
@@ -131,8 +143,16 @@ function setup() {
 
     textInput.parent(sideDiv);
     input.parent(sideDiv);
-    PickedColor.parent(sideDiv);
+
+    textInputSaturation.parent(sideDiv);
+    inputSaturation.parent(sideDiv);
+    textInputBrightness.parent(sideDiv);
+    inputBrightness.parent(sideDiv);
+    textInputHue.parent(sideDiv);
+    inputHue.parent(sideDiv);
     imageCircle.parent(sideDiv);
+
+    //PickedColor.parent(sideDiv);
     button.parent(sideDiv);
     containerC.parent(container);
 
@@ -144,9 +164,15 @@ function setup() {
 }
 
 function draw() {
+    console.log(inputSaturation.value());
+    saturateCircle = inputSaturation.value();
+    console.log(inputBrightness.value());
+    brightnessCircle = inputBrightness.value();
+    console.log(inputHue.value());
+    hueRotateCircle = inputHue.value();
 
+    imageCircle.style('filter', 'invert(0.5) sepia(100%) saturate('+saturateCircle+'%) hue-rotate('+hueRotateCircle+'deg) brightness('+brightnessCircle+'%)');
 }
-
 
   module.exports = inputValue;
 
@@ -177,23 +203,29 @@ function drawIcon(url){
     boxArea.style('position', 'relative');
     boxArea.style('display', 'inline-block');
     boxArea.style('margin', '4%');
+    boxArea.style('background-color', 'white');
     //boxArea.mousePressed(selectIcon);
 
-
-
     colorMode(HSB, 255);
-    console.log(PickedColor.color());
-    let huePickedColor = hue(PickedColor.color());
-    let saturationPickedColor = saturation(PickedColor.color());
-    let brightnessPickedColor = brightness(PickedColor.color());
-    console.log(huePickedColor);
-    console.log(saturationPickedColor);
-    console.log(brightnessPickedColor);
+    //console.log(PickedColor.color());
+    //let huePickedColor = hue(PickedColor.color());
+    //let saturationPickedColor = saturation(PickedColor.color());
+    //let brightnessPickedColor = brightness(PickedColor.color());
+    //console.log(huePickedColor);
+    //console.log(saturationPickedColor);
+    //console.log(brightnessPickedColor);
 
-    icon.style('filter', 'invert(0.5) sepia(100%) saturate('+saturationPickedColor/100+') hue-rotate('+map(huePickedColor,0,255,0,360)+'deg) brightness('+brightnessPickedColor/100+')');
+    icon.style('filter', 'invert(0.5) sepia(100%) saturate('+saturateCircle+'%) hue-rotate('+hueRotateCircle+'deg) brightness('+brightnessCircle+'%)');
+    //icon.style('filter', 'invert(0.5) sepia(100%) saturate('+saturationPickedColor/100+') hue-rotate('+map(huePickedColor,0,255,0,360)+'deg) brightness('+brightnessPickedColor/100+')');
 
-    icon.style('width', '100%');
+    //icon.style('width', '100%');
+    //icon.style('height', 'auto');
+    let wIcon = random(50, 100);
+    icon.style('width', wIcon + '%');
     icon.style('height', 'auto');
+    let xIcon = random(0, boxArea.width-wIcon);
+    let yIcon = random(10, boxArea.height-icon-height);
+    icon.position(xIcon, yIcon);
 
     // blur()
     // brightness()
@@ -208,8 +240,10 @@ function drawIcon(url){
     // url() – for applying SVG filters
     // custom() – “coming soon”
 
-    xText = random(0, boxArea.width);
-    yText = random(10, boxArea.height);
+    let textW = textWidth(text);
+    let textH = 0 /*textAscent(text)*/;
+    xText = random(0, boxArea.width-textW);
+    yText = random(10, boxArea.height-textH);
 
     text.position(xText, yText);
     // text.style('font-family', loadFont(localStorage.getItem("fileRandomFontStorage")));

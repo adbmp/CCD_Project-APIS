@@ -5,13 +5,13 @@ body{
     font-weight: 300;
     display: flex;
     flex-direction: row;
-    overflow: hidden;
+/*overflow: hidden;*/
 }
 
 /* #settings{
-    width: 100px;
-    height: 100px;
-    background-color: yellow;
+width: 100px;
+height: 100px;
+background-color: yellow;
 } */
 
 
