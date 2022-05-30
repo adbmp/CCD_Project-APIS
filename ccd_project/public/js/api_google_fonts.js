@@ -50,8 +50,8 @@ function getRandomFamilyFont() {
     randomIndex = Math.floor(Math.random() * arrayFamilies.length);
     randomFont = arrayFamilies[randomIndex];
     // console.log('choosed category:', randomFont);
-    console.log('choosed font index:',randomIndex);
-    console.log('choosed font:', randomFont);
+    //COMENTEIconsole.log('choosed font index:',randomIndex);
+    //COMENTEIconsole.log('choosed font:', randomFont);
     return randomFont;
 }
 
@@ -71,8 +71,8 @@ function getFilesFont(json1) {
 var fileRandomFont;
 function getFileRandomFont(){
     fileRandomFont = arrayFilesFonts[randomIndex].regular;
-    console.log(randomIndex);
-    console.log('choosed font file:', fileRandomFont);
+    //COMENTEI console.log(randomIndex);
+    //COMENTEI console.log('choosed font file:', fileRandomFont);
     localStorage.setItem("fileRandomFontStorage", fileRandomFont);
     return fileRandomFont;
 }
@@ -86,7 +86,7 @@ function getCategoriesFont(json1) {
         arrayCategories [i] = font.category;
     });
     //COMENTEI console.log("Categories");
-     console.log(arrayCategories);
+    //COMENTEI console.log(arrayCategories);
      return arrayCategories;
     /*Informa-me quais as diferentes categorias, sem repetições*/
     /*var uniqueCategories = arrayCategories.filter(function (value, index, self) {
@@ -99,7 +99,7 @@ function getCategoriesFont(json1) {
 var categoryRandomFont;
 function getCategoryRandomFont(){
     categoryRandomFont = arrayCategories[randomIndex];
-    console.log(categoryRandomFont);
+    //COMENTEI console.log(categoryRandomFont);
     return categoryRandomFont;
 }
 
