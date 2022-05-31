@@ -5,7 +5,9 @@ const NounProject = require('the-noun-project');
 //Criação de um servidor na porta 3000
 const app = express()
 const port = 3000;
+
 app.use(express.static('public'))
+app.use(express.json());
 
 //Key e Secret da API do Noun Project
 nounProject = new NounProject({
@@ -15,6 +17,11 @@ nounProject = new NounProject({
 
 //Importação do Nome colocado no input do P5.js
 const brandName = require('./public/js/logo_maker.js');
+
+
+app.post('/receive', (request, response) => {
+    console.log(request.body[3]);
+  })
 
 //Fetch dos icons através do nome colocado no input
 app.get('/' +brandName, (req, res) => {

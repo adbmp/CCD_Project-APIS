@@ -12,6 +12,11 @@ body{
     border: 2px solid green;
 }
 
+#categories {
+    position: absolute;
+    z-index: 1;
+}
+
 /* #settings{
 width: 100px;
 height: 100px;

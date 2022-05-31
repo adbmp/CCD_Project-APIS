@@ -301,7 +301,25 @@ function drawIcon(url) {
            //divClicada[i]
         })
     }*/
-
 }
 
-
+//WEB API DO CONCEPT NET 
+function cNet(url) {
+    fetch(url).then(function (res) {
+        return res.json();
+    }).then(function (data) {
+        for (let i = 0; i < 2; i++) {
+            let word = split(data.related[i]['@id'], '/');
+            const result = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(word)
+            }
+            fetch('/receive', result);
+        }
+    }).catch(function (err) {
+        console.error(err);
+    })
+}

@@ -16,10 +16,52 @@
 
 <body>
 
-    <script></script>
+    <div id="categories"></div>
+
     <script type="text/javascript" src="/js/api_google_fonts.js"></script>
     <script type="text/javascript" src="/js/logo_maker.js"></script>
+    <script>
+        let categories = ['textile', 'technology', 'sports', 'nature', 'company',
+            'food', 'culinary', 'travel', 'hospitality', 'education', 'music'];
 
-   </body>
+        for (let i = 0; i < categories.length; i++) {
+            checkbox(i, categories[i]);
+        };
+
+        function checkbox(num, value) {
+            
+            let label = document.createElement('label');
+            label.setAttribute('for', 'c' + num);
+
+            let input = document.createElement('input');
+            input.setAttribute('id', 'c' + num);
+            input.setAttribute('type', 'checkbox');
+            input.setAttribute('name', 'category');
+            input.setAttribute('value', value);
+            input.innerText = value;
+
+            label.appendChild(input);
+            document.querySelector('#categories').appendChild(label);
+        }
+
+        let btn = document.createElement('button');
+        btn.innerText = 'SUBMIT';
+        document.querySelector('#categories').appendChild(btn);
+
+        let results = [];
+
+        btn.addEventListener('click', (event) => {
+            let checkboxes = document.querySelectorAll('input[name="category"]:checked');
+            let values = [];
+            checkboxes.forEach((checkbox) => {
+                values.push(checkbox.value);
+            });
+            for (let i = 0; i < values.length; i++) {
+                cNet('https://api.conceptnet.io/related/c/en/' + values[i] + '?filter=/c/en');
+            }
+        });
+    </script>
+
+</body>
 
 </html>
