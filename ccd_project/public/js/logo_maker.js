@@ -261,9 +261,20 @@ function drawIcon(url) {
     text.style('font-style', 'normal'); //italic
     text.style('font-size', textSize + 'px');
 
+    text.style('color', 'white');
+    //text.style('-webkit-text-stroke-width', '0.5px');
+    //text.style('-webkit-text-stroke-color', 'black');
+    text.style('text-shadow', '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000');
+
+    if (brightnessCircle !== 0 /*|| ((xText+textW)<xIcon || (xText)>(xIcon+wIcon))*/) {
+        text.style('color', 'black');
+        text.style('text-shadow', 'none');
+    }
+
     buttonExport = createButton('Export');
     buttonExport.id("export");
     buttonExport.value("Submit");
+    buttonExport.mousePressed(exportIcon);
     buttonExport.style('position', 'absolute');
     buttonExport.style('right', '20px');
     buttonExport.style('bottom', '20px');
@@ -286,21 +297,34 @@ function drawIcon(url) {
             //iconSelect[i].style.border = '2px solid green';
             iconSelect[i].classList.add("divClicada");
             nClick++
-            if(nClick===2){
+            if (nClick === 2) {
                 //iconSelect[i].style.border = 'none';
                 iconSelect[i].classList.remove("divClicada");
                 nClick = 0;
             }
         })
     }
+}
+
+function exportIcon() {
     //EXPORTAR DIV CLICADA----------------------------------------------------
-    /*let divClicada = document.querySelectorAll('.divClicada');
+    console.log("olá");
+    let divClicada = document.querySelectorAll('.divClicada');
     for (let j = 0; j < divClicada.length; j++) {
-        buttonExport.addEventListener('click', function () {
-           //http://html2canvas.hertzen.com/
-           //divClicada[i]
-        })
-    }*/
+        html2canvas(divClicada[j]).then(function(canvas) {
+            document.getElementById('result').appendChild(canvas);
+
+            let cvs = document.querySelector("canvas");
+            let dataURI = cvs.toDataURL("image/jpeg");
+            let downloadLink = document.querySelector("#result>a");
+            downloadLink.href = dataURI;
+            downloadLink.download = "div2canvasimage.jpg";
+            console.log(dataURI);
+        });
+        document.getElementById('result').style.display = "block";
+    }
+    //https://b.codewithsundeep.com/2022/05/convert-html-to-canvas-and-canvas-to.html
+    //https://www.youtube.com/watch?v=4cFtRjF5WtM&ab_channel=CodeWithSundeep
 }
 
 //WEB API DO CONCEPT NET 

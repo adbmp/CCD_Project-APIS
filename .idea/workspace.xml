@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3c9e8b90-8a11-476b-89dc-118da2dca125" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/ccd_project/public/js/html2canvas.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ccd_project/public/js/html2canvas.min.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ccd_project/public/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/ccd_project/public/css/index.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ccd_project/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/ccd_project/public/index.html" afterDir="false" />
@@ -14,6 +16,13 @@
   </component>
   <component name="ComposerSettings">
     <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -40,6 +49,9 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ccd_project/public/js" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/ccd_project/public/images" />
     </key>
@@ -58,11 +70,25 @@
       <workItem from="1653820886750" duration="126000" />
       <workItem from="1653821496398" duration="8431000" />
       <workItem from="1653864101426" duration="7839000" />
-      <workItem from="1653921982591" duration="6960000" />
+      <workItem from="1653921982591" duration="7115000" />
+      <workItem from="1653994010969" duration="233000" />
+      <workItem from="1653994305369" duration="8045000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/ccd_project/public/js/logo_maker.js</url>
+          <line>31</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
