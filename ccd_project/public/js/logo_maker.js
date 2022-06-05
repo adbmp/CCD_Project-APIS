@@ -207,6 +207,7 @@ function drawIcon(url) {
     boxArea.style('display', 'inline-block');
     boxArea.style('margin', '4%');
     boxArea.style('background-color', 'white');
+    boxArea.style('border', '1px solid black');
 
     colorMode(HSB, 255);
     //console.log(PickedColor.color());
@@ -308,7 +309,7 @@ function drawIcon(url) {
 
 function exportIcon() {
     //EXPORTAR DIV CLICADA----------------------------------------------------
-    console.log("olá");
+   /* console.log("olá");
     let divClicada = document.querySelectorAll('.divClicada');
     for (let j = 0; j < divClicada.length; j++) {
         html2canvas(divClicada[j]).then(function(canvas) {
@@ -322,7 +323,7 @@ function exportIcon() {
             console.log(dataURI);
         });
         document.getElementById('result').style.display = "block";
-    }
+    }*/
     //https://b.codewithsundeep.com/2022/05/convert-html-to-canvas-and-canvas-to.html
     //https://www.youtube.com/watch?v=4cFtRjF5WtM&ab_channel=CodeWithSundeep
 }
