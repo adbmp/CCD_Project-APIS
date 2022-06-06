@@ -28,7 +28,7 @@ body {
 
 #categories {
     position: fixed;
-    top: 28vw;
+    top: 48vh;
     z-index: 1;
     display: block;
     left: 20px;

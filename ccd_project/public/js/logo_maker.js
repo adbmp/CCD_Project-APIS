@@ -217,13 +217,8 @@ function searchConcept() {
             for (let j = 0; j < values.length; j++) {
                 cNet('https://api.conceptnet.io/related/c/en/' + values[j] + '?filter=/c/en');
             }
-<<<<<<< HEAD
         };
         cNet('https://api.conceptnet.io/related/c/en/' + input.value() + '?filter=/c/en');
-=======
-        }
-        ;
->>>>>>> d86d421192d5b8a118ed2401664e1d88fb64164d
     }
 }
 
@@ -235,13 +230,7 @@ function loadInfo(result) {
         console.log(data);
          data.forEach(function (el) {
             drawIcon(el.preview_url);
-<<<<<<< HEAD
          });
-=======
-            selecionarIcons();
-            //buttonExport.mousePressed(exportIcon());
-        });
->>>>>>> d86d421192d5b8a118ed2401664e1d88fb64164d
     }).catch(function (err) {
         console.error(err);
     })
@@ -332,14 +321,10 @@ function drawIcon(url) {
         new drawIconClass(url, xIcon, yIcon, wIcon, textText, sText, xText, yText, fText, cText);
     }
 }
-<<<<<<< HEAD
-function drawButtonExport() {
-    let buttonExport = createButton('Export');
-=======
+
 
 function drawButtonExport() {
     buttonExport = createButton('Export');
->>>>>>> d86d421192d5b8a118ed2401664e1d88fb64164d
     buttonExport.id("export");
     buttonExport.value("Submit");
     buttonExport.mousePressed(saveInfo);
