@@ -24,17 +24,17 @@ app.post('/receive', (request, response) => {
     response.end();
 
     //Com os valores obtidos é realizada a busca de icos da API do tnp
-    app.get('/' + request.body[3], (req, res) => {
-        nounProject.getIconsByTerm(request.body[3], { limit: 2 }, function (err, data) {
-            if (!err) {
-                res.send(data.icons);
-                return data.icons;
-            } else {
-                console.error(err);
-                return undefined;
-            }
-        });
-    })
+        app.get('/' + request.body[3], (req, res) => {
+            nounProject.getIconsByTerm(request.body[3], { limit: 2 }, function (err, data) {
+                if (!err) {
+                    res.send(data.icons);
+                    return data.icons;
+                } else {
+                    console.error(err);
+                    return undefined;
+                }
+            });
+        })
 })
 
 //listen to port 3000

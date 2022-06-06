@@ -66,7 +66,6 @@ function preload() {
 function setup() {
     stroke(255);
     frameRate(30);
-
     //Barra lateral
     sideDiv = createDiv();
     sideDiv.id("settings");
@@ -207,16 +206,17 @@ function draw() {
 }
 
 function searchConcept() {
+    let values = [];
+    values.push(input.value());
     for (let i = 0; i < 10; i++) {
         let checkbox = select('#c' + i).elt;
-
-        let values = [];
         if (checkbox.checked == true) {
             values.push(checkbox.value);
             for (let j = 0; j < values.length; j++) {
                 cNet('https://api.conceptnet.io/related/c/en/' + values[j] + '?filter=/c/en');
             }
         };
+        cNet('https://api.conceptnet.io/related/c/en/' + input.value() + '?filter=/c/en');
     }
 }
 
@@ -226,9 +226,9 @@ function loadInfo(result) {
         return res.json();
     }).then(function (data) {
         console.log(data);
-        data.forEach(function (el) {
+         data.forEach(function (el) {
             drawIcon(el.preview_url);
-        });
+         });
     }).catch(function (err) {
         console.error(err);
     })
@@ -241,7 +241,6 @@ function cNet(url) {
     }).then(function (data) {
         for (let i = 0; i < 2; i++) {
             let word = split(data.related[i]['@id'], '/');
-            loadInfo(word[3]);
             button.mousePressed(loadInfo(word[3]));
             const result = {
                 method: 'POST',
@@ -257,7 +256,7 @@ function cNet(url) {
     })
 }
 
-class drawIconClass{
+class drawIconClass {
     constructor(urlIconC, xIconC, yIconC, wIconC, textTextC, sTextC, xTextC, yTextC, fTextC, cTextC) {
         boxArea = createDiv();
         boxArea.class('genBox');
@@ -302,7 +301,7 @@ class drawIconClass{
 
 function drawIcon(url) {
     for (let i = 0; i < 1; i++) {
-        wIcon = random(20, 80);
+        wIcon = random(20, width);
         xIcon = random(0, 100 - wIcon);
         yIcon = random(10, 100 - icon - height);
         sText = 16;
@@ -321,7 +320,7 @@ function drawIcon(url) {
         new drawIconClass(url, xIcon, yIcon, wIcon, textText, sText, xText, yText, fText, cText);
     }
 }
-function drawButtonExport(){
+function drawButtonExport() {
     let buttonExport = createButton('Export');
     buttonExport.id("export");
     buttonExport.value("Submit");
