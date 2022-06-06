@@ -17,7 +17,7 @@ let xText;
 let yText;
 let fText;
 let cText;
-let fontFamilyA = ["Oxygen", "Nuosu SIL", "Lobster", "Amatic SC", "Inconsolata"];
+let fontFamilyA = ["Nuosu SIL", "Cormorant Garamond", "Antic Slab", "Joan", "Roboto", "Open Sans", "Montserrat", "Oxygen", "Oleo Script", "Lobster", "Special Elite", "Rubik Microbe", "Amatic SC", "Pacifico", "Kaushan Script", "Berkshire Swash", "Inconsolata", "Cutive Mono", "Roboto Mono", "Space Mono"];
 //NOVO
 let icon;
 let urlIcon;
@@ -73,7 +73,7 @@ function setup() {
     sideDiv.style('width', '20vw');
     sideDiv.style('height', '100vh');
     sideDiv.style('background-color', '#FFD84F');
-    sideDiv.style('position', 'absolute');
+    sideDiv.style('position', 'fixed');
     sideDiv.style('top', '0');
     sideDiv.style('left', '0');
 
@@ -113,7 +113,6 @@ function setup() {
     inputSaturation.id("inputSaturation");
     inputSaturation.style('display', 'block');
     inputSaturation.style('margin', '2% 0 10% 0');
-    //createSlider(min, max, [value], [step])
 
     //INPUT SLIDE BRIGHTNESS
     textInputBrightness = createP("Brightness:");
@@ -147,7 +146,6 @@ function setup() {
     button = createButton('Generate');
     button.id("submit");
     button.value("Submit");
-    button.mousePressed(drawButtonExport());
     button.style('display', 'block');
     button.style('position', 'absolute');
     button.style('left', '20px');
@@ -157,6 +155,7 @@ function setup() {
     button.style('box-shadow', '0 2px 2px rgba(0, 0, 0, 0.25)');
     button.style('border', 'none');
     button.style('cursor', 'pointer');
+    drawButtonExport();
 
     //Container do conjunto de logos criados
     container = createDiv();
@@ -170,9 +169,12 @@ function setup() {
     containerC.style('width', '60vw');
     containerC.style('height', 'auto');
     containerC.style('position', 'relative');
+    containerC.style('top', '20px');
     containerC.style('left', '50%');
+    containerC.style('transform', 'translateX(-50%)');
+/*    containerC.style('left', '50%');
     containerC.style('top', '50%');
-    containerC.style('transform', 'translateX(-50%) translateY(-50%)');
+    containerC.style('transform', 'translateX(-50%) translateY(-50%)');*/
 
     textInput.parent(sideDiv);
     input.parent(sideDiv);
@@ -278,7 +280,6 @@ class drawIconClass{
         icon.position(xIconC, yIconC);
         icon.style('filter', 'invert(0.5) sepia(100%) saturate(' + saturateCircle + '%) hue-rotate(' + hueRotateCircle + 'deg) brightness(' + brightnessCircle + '%)');
 
-        //text = createP(textTextC);
         text = createP(input.value());
         text.style('font-family', fTextC);
         text.style('font-weight', '400');
@@ -328,7 +329,7 @@ function drawButtonExport(){
     //buttonExport.mousePressed(algortimo);
     //buttonExport.mousePressed(exportIcon);
     //buttonExport.style('display', 'block');
-    buttonExport.style('position', 'absolute');
+    buttonExport.style('position', 'fixed');
     buttonExport.style('right', '20px');
     buttonExport.style('bottom', '20px');
     buttonExport.style('padding', '10px');

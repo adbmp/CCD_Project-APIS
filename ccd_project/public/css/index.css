@@ -14,7 +14,7 @@ body {
 }
 
 #categories {
-    position: absolute;
+    position: fixed;
     top: 40%;
     z-index: 1;
     display: block;
@@ -22,7 +22,7 @@ body {
 }
 
 #result {
-    position: absolute;
+    position: fixed;
     right: 20px;
     bottom: 100px;
     z-index: 1;
