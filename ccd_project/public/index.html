@@ -44,7 +44,7 @@
     <script src="js/html2canvas.min.js"></script>
 </head>
 
-<body>
+<body id="boDy">
 
     <div id="categories"></div>
 
@@ -70,6 +70,7 @@
             input.setAttribute('value', value);
             input.innerText = value;
             input.style.display='inline-block';
+            input.style.margin='0px';
             input.style.marginRight='10px';
 
             let label = document.createElement('label');
@@ -87,7 +88,8 @@
             //sideDiv1.appendChild(categoriesDiv);
         }
     </script>
-<div id="result" style="display: block"><a href=""><button id="buttonResult">Download JPG</button></a></div>
+<!--    <canvas id="myCanvas"></canvas>
+<div id="result"><a href=""><button id="buttonResult">Download JPG</button></a></div>-->
 </body>
 
 </html>

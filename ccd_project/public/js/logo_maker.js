@@ -9,6 +9,8 @@ var yText;*/
 //---------------
 //NOVO
 let boxArea;
+let iconSelect;
+let buttonExport;
 //NOVO
 let text;
 let textText;
@@ -46,13 +48,10 @@ let hueRotateCircle = 0;
 //LOGOS
 //let icon;
 let button;
-let buttonExport;
 let sideDiv;
 let container;
 let containerC;
 let inputValue;
-
-let valueExport = false;
 
 function preload() {
 
@@ -143,6 +142,10 @@ function setup() {
     imageCircle.style('height', 'auto');
     imageCircle.style('margin', 'auto');
 
+    let textIcon = createP("Icon:");
+    textIcon.style('display', 'block');
+    textIcon.style('margin', '5% 0 2% 20px');
+
     button = createButton('Generate');
     button.id("submit");
     button.value("Submit");
@@ -172,9 +175,6 @@ function setup() {
     containerC.style('top', '20px');
     containerC.style('left', '50%');
     containerC.style('transform', 'translateX(-50%)');
-/*    containerC.style('left', '50%');
-    containerC.style('top', '50%');
-    containerC.style('transform', 'translateX(-50%) translateY(-50%)');*/
 
     textInput.parent(sideDiv);
     input.parent(sideDiv);
@@ -190,9 +190,9 @@ function setup() {
     imageCircle.parent(colorDivDiv);
     colorDivDiv.parent(sideDiv);
 
+    textIcon.parent(sideDiv);
     button.parent(sideDiv);
     containerC.parent(container);
-
 }
 
 function draw() {
@@ -218,7 +218,8 @@ function searchConcept() {
             for (let j = 0; j < values.length; j++) {
                 cNet('https://api.conceptnet.io/related/c/en/' + values[j] + '?filter=/c/en');
             }
-        };
+        }
+        ;
     }
 }
 
@@ -230,6 +231,8 @@ function loadInfo(result) {
         console.log(data);
         data.forEach(function (el) {
             drawIcon(el.preview_url);
+            selecionarIcons();
+            //buttonExport.mousePressed(exportIcon());
         });
     }).catch(function (err) {
         console.error(err);
@@ -259,7 +262,7 @@ function cNet(url) {
     })
 }
 
-class drawIconClass{
+class drawIconClass {
     constructor(urlIconC, xIconC, yIconC, wIconC, textTextC, sTextC, xTextC, yTextC, fTextC, cTextC) {
         boxArea = createDiv();
         boxArea.class('genBox');
@@ -285,6 +288,7 @@ class drawIconClass{
         text.style('font-weight', '400');
         text.style('font-style', 'normal');
         text.style('font-size', sTextC + 'px');
+        text.style('margin', 0);
         text.position(xTextC, yTextC);
         text.style('color', cTextC);
         text.style('color', 'white');
@@ -305,12 +309,11 @@ function drawIcon(url) {
     for (let i = 0; i < 1; i++) {
         wIcon = random(20, 80);
         xIcon = random(0, 100 - wIcon);
-        yIcon = random(10, 100 - icon - height);
+        yIcon = random(10, 100 - wIcon);
         sText = 16;
         let textW = textWidth(text);
-        let textH = textSize;
         xText = random(0, 100 - textW);
-        yText = random(10, 100 - textH);
+        yText = random(10, 100 - 25);
 
         let randomFontIndex = Math.floor(Math.random() * fontFamilyA.length);
         for (let j = 0; j < fontFamilyA.length; j++) {
@@ -322,12 +325,12 @@ function drawIcon(url) {
         new drawIconClass(url, xIcon, yIcon, wIcon, textText, sText, xText, yText, fText, cText);
     }
 }
-function drawButtonExport(){
-    let buttonExport = createButton('Export');
+
+function drawButtonExport() {
+    buttonExport = createButton('Export');
     buttonExport.id("export");
     buttonExport.value("Submit");
-    //buttonExport.mousePressed(algortimo);
-    //buttonExport.mousePressed(exportIcon);
+    buttonExport.mousePressed(saveInfo);
     //buttonExport.style('display', 'block');
     buttonExport.style('position', 'fixed');
     buttonExport.style('right', '20px');
@@ -427,27 +430,121 @@ function drawIcon(url) {
     }
 }*/
 
-
-function exportIcon() {
-    //EXPORTAR DIV CLICADA----------------------------------------------------
-    console.log("olá");
-    let divClicada = document.querySelectorAll('.divClicada');
-    for (let j = 0; j < divClicada.length; j++) {
-        html2canvas(divClicada[j]).then(function (canvas) {
-            document.getElementById('result').appendChild(canvas);
-
-            let cvs = document.querySelector("canvas");
-            let dataURI = cvs.toDataURL("image/jpeg");
-            let downloadLink = document.querySelector("#result>a");
-            downloadLink.href = dataURI;
-            downloadLink.download = "div2canvasimage.jpg";
-            console.log(dataURI);
-        });
-        document.getElementById('result').style.display = "block";
+function selecionarIcons() {
+    iconSelect = document.querySelectorAll('.genBox');
+    let nClick = 0;
+    for (let i = 0; i < iconSelect.length; i++) {
+        iconSelect[i].addEventListener('click', function () {
+            iconSelect[i].classList.add("divClicada");
+            nClick++
+            if (nClick === 2) {
+                //iconSelect[i].style.border = 'none';
+                iconSelect[i].classList.remove("divClicada");
+                nClick = 0;
+            }
+        })
     }
-    //https://b.codewithsundeep.com/2022/05/convert-html-to-canvas-and-canvas-to.html
-    //https://www.youtube.com/watch?v=4cFtRjF5WtM&ab_channel=CodeWithSundeep
 }
 
+let iconSave;
+let textSave;
+let divSave;
+
+let xTextSave;
+let tTextSave;
+let fTextSave;
+let xIconSave;
+let tIconSave;
+let wIconSave;
+let hIconSave;
+let urlIconSave;
+
+function saveInfo() {
+    divSave = document.querySelectorAll('.divClicada');
+    for (let i = 0; i < divSave.length; i++) {
+        console.log(divSave[i]);
+
+        iconSave = document.querySelector('.divClicada>img');
+        textSave = document.querySelector('.divClicada>p');
+        console.log(iconSave);
+        console.log(textSave);
+
+        //https://zellwk.com/blog/css-values-in-js/ HOW TO GET VALUES FROM STYLE CSS DE ELEMENTO
+        let xTS = textSave.style.left;
+        xTextSave = xTS.substr(0, xTS.indexOf('p'));
+        //console.log('left text: ' + xTextSave);
+        let tTS = textSave.style.top;
+        tTextSave = tTS.substr(0, tTS.indexOf('p'));
+        console.log('top text: ' + tTextSave);
+        fTextSave = textSave.style.fontFamily;
+        //console.log('family text: ' + fTextSave);
+
+        let xIS = iconSave.style.left;
+        xIconSave = xIS.substr(0, xIS.indexOf('p'));
+        //console.log('left icon: ' + xIconSave);
+        let tIS = iconSave.style.top;
+        tIconSave = tIS.substr(0, tIS.indexOf('p'));
+        //console.log('top icon: ' + tIconSave);
+        let wIS = iconSave.style.width;
+        wIconSave = wIS.substr(0, wIS.indexOf('%'));
+        //console.log('width icon: ' + wIconSave);
+        hIconSave = iconSave.style.height;
+        //console.log('height icon: ' + hIconSave);
+        urlIconSave = iconSave.src;
+
+    }
+    canvasExport();
+}
+
+/*function canvasExport() {
+    console.clear();
+    console.log('left text: ' + xTextSave);
+    console.log('top text: ' + tTextSave);
+    console.log('family text: ' + fTextSave);
+    console.log('left icon: ' + xIconSave);
+    console.log('top icon: ' + tIconSave);
+    console.log('width icon: ' + wIconSave);
+    console.log('height icon: ' + hIconSave);
+    console.log('url icon: ' + urlIconSave);
+    console.log(input.value());
+
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+    console.log(ctx.font = "16px "+fTextSave);
+    ctx.font = "16px "+fTextSave
+    ctx.fillText(input.value(), xTextSave, 50);
+
+    //https://www.html5canvastutorials.com/tutorials/html5-canvas-image-size/
+    let imageObj = new Image();
+    imageObj.onload = function() {
+        console.log("imageObj.width " + imageObj.width);
+        console.log("wIconSave " + wIconSave);
+        ctx.drawImage(imageObj, xIconSave, tIconSave, imageObj.width/2, imageObj.height/2);
+    };
+    imageObj.src = urlIconSave;
+
+    //let img = document.getElementsByClassName("icon")[0];
+    //ctx.drawImage(img,xIconSave, tIconSave);
+}*/
+
+/*function exportIcon() {
+    //EXPORTAR DIV CLICADA----------------------------------------------------
+        let divClicada = document.querySelectorAll('.divClicada');
+        for (let j = 0; j < divClicada.length; j++) {
+            html2canvas(divClicada[j]).then(function (canvas) {
+                document.getElementById('result').appendChild(canvas);
+
+                let cvs = document.querySelector("canvas");
+                let dataURI = cvs.toDataURL("image/jpeg");
+                let downloadLink = document.querySelector("#result>a");
+                downloadLink.href = dataURI;
+                downloadLink.download = "div2canvasimage.jpg";
+                console.log(dataURI);
+            });
+            document.getElementById('result').style.display = "block";
+        }
+    //https://b.codewithsundeep.com/2022/05/convert-html-to-canvas-and-canvas-to.html
+    //https://www.youtube.com/watch?v=4cFtRjF5WtM&ab_channel=CodeWithSundeep
+}*/
 
 
