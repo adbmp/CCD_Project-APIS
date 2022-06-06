@@ -5,11 +5,13 @@ var textLogo;
 var textW;
 var xText;
 var yText;
+let fontFamilyA = ["Oxygen", "Nuosu SIL", "Lobster", "Amatic SC", "Inconsolata"];
 
-//input
+//INPUT
 let textInput;
 let input;
-//let PickedColor;
+
+//COLOR
 let textInputSaturation;
 let inputSaturation;
 let textInputBrightness;
@@ -22,7 +24,7 @@ let saturateCircle = 0;
 let brightnessCircle = 0;
 let hueRotateCircle = 0;
 
-//logos 
+//LOGOS
 let icon;
 let button;
 let buttonExport;
@@ -52,9 +54,7 @@ function setup() {
     sideDiv.style('width', '20vw');
     sideDiv.style('height', '100vh');
     sideDiv.style('background-color', '#FFD84F');
-    //sideDiv.style('border-right', '1px solid black');
     sideDiv.style('position', 'absolute');
-    //sideDiv.style('display', 'inline-block');
     sideDiv.style('top', '0');
     sideDiv.style('left', '0');
 
@@ -75,8 +75,6 @@ function setup() {
     textCor.style('display', 'block');
     textCor.style('margin', '5% 0 2% 20px');
 
-    //PickedColor = createColorPicker("#D40C3E");
-    //PickedColor.style('margin', '0 0 10% 2%');
     let colorDivDiv = createDiv();
     colorDivDiv.id("colorDivDiv");
     colorDivDiv.style('display', 'flex');
@@ -144,7 +142,6 @@ function setup() {
     container.style('width', '80vw');
     container.style('height', '100vh');
     container.style('position', 'absolute');
-    //container.style('display', 'inline-block');
     container.style('left', '20vw');
     container.style('top', '0');
 
@@ -170,14 +167,11 @@ function setup() {
     imageCircle.parent(colorDivDiv);
     colorDivDiv.parent(sideDiv);
 
-
-    //PickedColor.parent(sideDiv);
     button.parent(sideDiv);
     containerC.parent(container);
 }
 
 function draw() {
-
     button.mousePressed(searchConcept);
 
     //console.log(inputSaturation.value());
@@ -188,8 +182,6 @@ function draw() {
     hueRotateCircle = inputHue.value();
 
     imageCircle.style('filter', 'invert(0.5) sepia(100%) saturate(' + saturateCircle + '%) hue-rotate(' + hueRotateCircle + 'deg) brightness(' + brightnessCircle + '%)');
-
-
 }
 
 function searchConcept() {
@@ -220,8 +212,29 @@ function loadInfo(result) {
     })
 }
 
+//Web API do concept Net
+function cNet(url) {
+    fetch(url).then(function (res) {
+        return res.json();
+    }).then(function (data) {
+        for (let i = 0; i < 2; i++) {
+            let word = split(data.related[i]['@id'], '/');
+            loadInfo(word[3]);
+            button.mousePressed(loadInfo(word[3]));
+            const result = {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(word)
+            }
+            fetch('/receive', result);
+        }
+    }).catch(function (err) {
+        console.error(err);
+    })
+}
 
-//"canvas"/div onde irá ser desenhado o icon + texto
 function drawIcon(url) {
     let boxArea = createDiv();
     let icon = createImg(url);
@@ -238,38 +251,15 @@ function drawIcon(url) {
     boxArea.style('border', '1px solid black');
 
     colorMode(HSB, 255);
-    //console.log(PickedColor.color());
-    //let huePickedColor = hue(PickedColor.color());
-    //let saturationPickedColor = saturation(PickedColor.color());
-    //let brightnessPickedColor = brightness(PickedColor.color());
-    //console.log(huePickedColor);
-    //console.log(saturationPickedColor);
-    //console.log(brightnessPickedColor);
 
     icon.style('filter', 'invert(0.5) sepia(100%) saturate(' + saturateCircle + '%) hue-rotate(' + hueRotateCircle + 'deg) brightness(' + brightnessCircle + '%)');
-    //icon.style('filter', 'invert(0.5) sepia(100%) saturate('+saturationPickedColor/100+') hue-rotate('+map(huePickedColor,0,255,0,360)+'deg) brightness('+brightnessPickedColor/100+')');
 
-    //icon.style('width', '100%');
-    //icon.style('height', 'auto');
     let wIcon = random(50, 100);
     icon.style('width', wIcon + '%');
     icon.style('height', 'auto');
     let xIcon = random(0, boxArea.width - wIcon);
     let yIcon = random(10, boxArea.height - icon - height);
     icon.position(xIcon, yIcon);
-
-    // blur()
-    // brightness()
-    // contrast()
-    // drop-shadow()
-    // grayscale()
-    // hue-rotate()
-    // invert()
-    // opacity()
-    // saturate()
-    // sepia()
-    // url() – for applying SVG filters
-    // custom() – “coming soon”
 
     let textSize = 16;
     let textW = textWidth(text);
@@ -290,11 +280,9 @@ function drawIcon(url) {
     text.style('font-size', textSize + 'px');
 
     text.style('color', 'white');
-    //text.style('-webkit-text-stroke-width', '0.5px');
-    //text.style('-webkit-text-stroke-color', 'black');
     text.style('text-shadow', '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000');
 
-    if (brightnessCircle !== 0 /*|| ((xText+textW)<xIcon || (xText)>(xIcon+wIcon))*/) {
+    if (brightnessCircle !== 0) {
         text.style('color', 'black');
         text.style('text-shadow', 'none');
     }
@@ -354,26 +342,5 @@ function exportIcon() {
     //https://www.youtube.com/watch?v=4cFtRjF5WtM&ab_channel=CodeWithSundeep
 }
 
-//Web API do concept Net
-function cNet(url) {
-    fetch(url).then(function (res) {
-        return res.json();
-    }).then(function (data) {
-        for (let i = 0; i < 2; i++) {
-            let word = split(data.related[i]['@id'], '/');
-            loadInfo(word[3]);
-            button.mousePressed(loadInfo(word[3]));
-            const result = {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(word)
-            }
-            fetch('/receive', result);
-        }
-    }).catch(function (err) {
-        console.error(err);
-    })
-}
+
 
