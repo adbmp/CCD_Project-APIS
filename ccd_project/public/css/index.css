@@ -8,25 +8,40 @@ body {
     background-color: #FAFAFA;
     /*overflow: hidden;*/
 }
+.main{
+    width: 100vw;
+    height: 100vh;
+}
+#myCanvas{
+    position: absolute;
+    left: 500px;
+    top:500px;
+    z-index: 1;
+    border: 1px solid black;
+    width: 100px;
+    height: 100px;
+}
 
 .divClicada {
     border: 2px solid green !important;
 }
 
 #categories {
-    position: absolute;
-    top: 40%;
+    position: fixed;
+    top: 28vw;
     z-index: 1;
     display: block;
     left: 20px;
 }
 
 #result {
-    position: absolute;
+    display: none;
+    position: fixed;
     right: 20px;
     bottom: 100px;
     z-index: 1;
 }
+
 #buttonResult{
     padding: 10px;
     background-color: #FFF5D3;
@@ -39,6 +54,7 @@ body {
 }
 #export{
     box-shadow:0 2px 2px rgba(0, 0, 0, 0.25);
+    z-index: 1;
 }
 #inputSaturation::-webkit-slider-thumb{
     -webkit-appearance: none;
