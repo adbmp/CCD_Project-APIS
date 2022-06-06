@@ -9,7 +9,7 @@ body{
     /*overflow: hidden;*/
 }
 .divClicada{
-    border: 2px solid green;
+    border: 2px solid green !important;
 }
 
 #categories {
