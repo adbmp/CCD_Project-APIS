@@ -296,6 +296,7 @@ function drawIcon(url) {
 
         new drawIconClass(url, xIcon, yIcon, wIcon, textText, sText, xText, yText, fText, cText);
     }
+    selecionarIcons();
 }
 
 
