@@ -1,11 +1,30 @@
 //TEXT
-var font;
+/*var font;
 var textSize;
 var textLogo;
 var textW;
 var xText;
-var yText;
+var yText;*/
+
+//---------------
+//NOVO
+let boxArea;
+//NOVO
+let text;
+let textText;
+let sText;
+let xText;
+let yText;
+let fText;
+let cText;
 let fontFamilyA = ["Oxygen", "Nuosu SIL", "Lobster", "Amatic SC", "Inconsolata"];
+//NOVO
+let icon;
+let urlIcon;
+let wIcon;
+let xIcon;
+let yIcon;
+//---------------
 
 //INPUT
 let textInput;
@@ -25,7 +44,7 @@ let brightnessCircle = 0;
 let hueRotateCircle = 0;
 
 //LOGOS
-let icon;
+//let icon;
 let button;
 let buttonExport;
 let sideDiv;
@@ -91,6 +110,7 @@ function setup() {
     textInputSaturation.style('display', 'block');
     textInputSaturation.style('margin', '2% 0 2% 0');
     inputSaturation = createSlider(0, 255, 0);
+    inputSaturation.id("inputSaturation");
     inputSaturation.style('display', 'block');
     inputSaturation.style('margin', '2% 0 10% 0');
     //createSlider(min, max, [value], [step])
@@ -127,6 +147,7 @@ function setup() {
     button = createButton('Generate');
     button.id("submit");
     button.value("Submit");
+    button.mousePressed(drawButtonExport());
     button.style('display', 'block');
     button.style('position', 'absolute');
     button.style('left', '20px');
@@ -169,6 +190,7 @@ function setup() {
 
     button.parent(sideDiv);
     containerC.parent(container);
+
 }
 
 function draw() {
@@ -235,6 +257,89 @@ function cNet(url) {
     })
 }
 
+class drawIconClass{
+    constructor(urlIconC, xIconC, yIconC, wIconC, textTextC, sTextC, xTextC, yTextC, fTextC, cTextC) {
+        boxArea = createDiv();
+        boxArea.class('genBox');
+        boxArea.style('width', '100px');
+        boxArea.style('height', '100px');
+        boxArea.style('position', 'relative');
+        boxArea.style('display', 'inline-block');
+        boxArea.style('margin', '4%');
+        boxArea.style('background-color', 'white');
+        boxArea.style('border', '1px solid black');
+
+        colorMode(HSB, 255);
+
+        icon = createImg(urlIconC);
+        icon.addClass("icon");
+        icon.style('width', wIconC + '%');
+        icon.style('height', 'auto');
+        icon.position(xIconC, yIconC);
+        icon.style('filter', 'invert(0.5) sepia(100%) saturate(' + saturateCircle + '%) hue-rotate(' + hueRotateCircle + 'deg) brightness(' + brightnessCircle + '%)');
+
+        //text = createP(textTextC);
+        text = createP(input.value());
+        text.style('font-family', fTextC);
+        text.style('font-weight', '400');
+        text.style('font-style', 'normal');
+        text.style('font-size', sTextC + 'px');
+        text.position(xTextC, yTextC);
+        text.style('color', cTextC);
+        text.style('color', 'white');
+        text.style('text-shadow', '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000');
+
+        if (brightnessCircle !== 0) {
+            text.style('color', 'black');
+            text.style('text-shadow', 'none');
+        }
+
+        icon.parent(boxArea);
+        text.parent(boxArea);
+        boxArea.parent(containerC);
+    }
+}
+
+function drawIcon(url) {
+    for (let i = 0; i < 1; i++) {
+        wIcon = random(20, 80);
+        xIcon = random(0, 100 - wIcon);
+        yIcon = random(10, 100 - icon - height);
+        sText = 16;
+        let textW = textWidth(text);
+        let textH = textSize;
+        xText = random(0, 100 - textW);
+        yText = random(10, 100 - textH);
+
+        let randomFontIndex = Math.floor(Math.random() * fontFamilyA.length);
+        for (let j = 0; j < fontFamilyA.length; j++) {
+            fText = fontFamilyA[randomFontIndex];
+        }
+
+        cText = "black";
+
+        new drawIconClass(url, xIcon, yIcon, wIcon, textText, sText, xText, yText, fText, cText);
+    }
+}
+function drawButtonExport(){
+    let buttonExport = createButton('Export');
+    buttonExport.id("export");
+    buttonExport.value("Submit");
+    //buttonExport.mousePressed(algortimo);
+    //buttonExport.mousePressed(exportIcon);
+    //buttonExport.style('display', 'block');
+    buttonExport.style('position', 'absolute');
+    buttonExport.style('right', '20px');
+    buttonExport.style('bottom', '20px');
+    buttonExport.style('padding', '10px');
+    buttonExport.style('backgroundColor', '#FFF5D3');
+    buttonExport.style('border', 'none');
+    buttonExport.style('cursor', 'pointer');
+
+    buttonExport.parent(containerC);
+}
+
+/*
 function drawIcon(url) {
     let boxArea = createDiv();
     let icon = createImg(url);
@@ -319,7 +424,8 @@ function drawIcon(url) {
             }
         })
     }
-}
+}*/
+
 
 function exportIcon() {
     //EXPORTAR DIV CLICADA----------------------------------------------------

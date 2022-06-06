@@ -40,6 +40,10 @@ body {
 #export{
     box-shadow:0 2px 2px rgba(0, 0, 0, 0.25);
 }
+#inputSaturation::-webkit-slider-thumb{
+    -webkit-appearance: none;
+    background-color: black;
+}
 
 /* #settings{
 width: 100px;
