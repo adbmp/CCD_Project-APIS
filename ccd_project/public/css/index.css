@@ -1,4 +1,4 @@
-body{
+body {
     margin: 0;
     /*font-family: 'Inter', sans-serif;*/
     font-family: 'Poppins', sans-serif;
@@ -8,20 +8,27 @@ body{
     background-color: #FAFAFA;
     /*overflow: hidden;*/
 }
-.divClicada{
+
+.divClicada {
     border: 2px solid green !important;
 }
 
 #categories {
     position: absolute;
+    top: 43%;
     z-index: 1;
+    width: 20%;
+    display: inline-block;
+    left: 2%;
 }
-#result{
+
+#result {
     position: absolute;
     right: 20px;
     bottom: 100px;
 }
-#result>a{
+
+#result>a {
     display: block;
 }
 

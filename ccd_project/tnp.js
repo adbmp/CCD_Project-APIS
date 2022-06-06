@@ -15,24 +15,26 @@ nounProject = new NounProject({
     secret: '6e55ef3913814543be656a9d4a23fb74'
 });
 
-//Importação do Nome colocado no input do P5.js
-const brandName = require('./public/js/logo_maker.js');
-
-
+//App vai ao handler /receiver recolher a info 
+//obtida pela API do conceptNet - Fetch realizado no LogoMaker.js
 app.post('/receive', (request, response) => {
     console.log(request.body[3]);
-  })
 
-//Fetch dos icons através do nome colocado no input
-app.get('/' +brandName, (req, res) => {
-    nounProject.getIconsByTerm(brandName, {limit: 20}, function (err, data) {
-        if (!err) {
-            res.send(data.icons);
-        } else {
-            console.error (err);
-            return undefined;
-        }
-    });
+    //Para evitar erros, após termos a info recolhida pelo post, termina-se a resposta.
+    response.end();
+
+    //Com os valores obtidos é realizada a busca de icos da API do tnp
+    app.get('/' + request.body[3], (req, res) => {
+        nounProject.getIconsByTerm(request.body[3], { limit: 2 }, function (err, data) {
+            if (!err) {
+                res.send(data.icons);
+                return data.icons;
+            } else {
+                console.error(err);
+                return undefined;
+            }
+        });
+    })
 })
 
 //listen to port 3000

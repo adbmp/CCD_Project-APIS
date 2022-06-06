@@ -13,8 +13,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.js"></script>
 
-    <!--<script src="js/html2canvas.js"></script>
-    <script src="js/html2canvas.min.js"></script>-->
+    <script src="js/html2canvas.js"></script>
+    <script src="js/html2canvas.min.js"></script>
 </head>
 
 <body>
@@ -47,29 +47,12 @@
 
             label.appendChild(input);
             let categoriesDiv = document.querySelector('#categories');
-            //categoriesDiv.appendChild(label);
+            categoriesDiv.appendChild(label);
             let sideDiv1 = document.getElementById('settings');
             //sideDiv1.appendChild(categoriesDiv);
         }
-
-        let btn = document.createElement('button');
-        btn.innerText = 'SUBMIT';
-        document.querySelector('#categories').appendChild(btn);
-
-        let results = [];
-
-        btn.addEventListener('click', (event) => {
-            let checkboxes = document.querySelectorAll('input[name="category"]:checked');
-            let values = [];
-            checkboxes.forEach((checkbox) => {
-                values.push(checkbox.value);
-            });
-            for (let i = 0; i < values.length; i++) {
-                cNet('https://api.conceptnet.io/related/c/en/' + values[i] + '?filter=/c/en');
-            }
-        });
     </script>
-<div id="result" style="display: none"><a href=""><button>Download JPG</button></a></div>
+<div id="result" style="display: block"><a href=""><button>Download JPG</button></a></div>
 </body>
 
 </html>

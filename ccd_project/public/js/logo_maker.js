@@ -29,17 +29,17 @@ let buttonExport;
 let sideDiv;
 let container;
 let containerC;
-let inputValue = 'flower';
+let inputValue;
 
 let valueExport = false;
 
 function preload() {
 
-// httpGet('https://api.conceptnet.io/related/c/en/'+inputValue+'?filter=/c/en', 'json', false, function(data){
-// for(let i =0; i <5; i++){     
-// console.log(data.related[i]);
-// }
-//  });
+    // httpGet('https://api.conceptnet.io/related/c/en/'+inputValue+'?filter=/c/en', 'json', false, function(data){
+    // for(let i =0; i <5; i++){     
+    // console.log(data.related[i]);
+    // }
+    //  });
 }
 
 function setup() {
@@ -129,7 +129,6 @@ function setup() {
     button = createButton('Generate');
     button.id("submit");
     button.value("Submit");
-    button.mousePressed(loadInfo);
     button.style('display', 'block');
     button.style('position', 'absolute');
     button.style('left', '20px');
@@ -179,13 +178,8 @@ function setup() {
 }
 
 function draw() {
-    /*
-        let linkHead = document.createElement('link');
-        linkHead.type = 'text/css';
-        linkHead.rel = 'stylesheet';
-        document.getElementById('linkHead').appendChild(link);
-        linkHead.href = 'http://fonts.googleapis.com/css?family=' + randomFontF;
-    */
+
+    button.mousePressed(searchConcept);
 
     //console.log(inputSaturation.value());
     saturateCircle = inputSaturation.value();
@@ -199,12 +193,23 @@ function draw() {
 
 }
 
-module.exports = inputValue;
+function searchConcept() {
+    for (let i = 0; i < 10; i++) {
+        let checkbox = select('#c' + i).elt;
+
+        let values = [];
+        if (checkbox.checked == true) {
+            values.push(checkbox.value);
+            for (let j = 0; j < values.length; j++) {
+                cNet('https://api.conceptnet.io/related/c/en/' + values[j] + '?filter=/c/en');
+            }
+        };
+    }
+}
 
 //Load info do APK
-function loadInfo() {
-    valueExport = true;
-    fetch('/' + input.value()).then(function (res) {
+function loadInfo(result) {
+    fetch('/' + result).then(function (res) {
         return res.json();
     }).then(function (data) {
         console.log(data);
@@ -215,6 +220,7 @@ function loadInfo() {
         console.error(err);
     })
 }
+
 
 //"canvas"/div onde irá ser desenhado o icon + texto
 function drawIcon(url) {
@@ -331,10 +337,10 @@ function drawIcon(url) {
 
 function exportIcon() {
     //EXPORTAR DIV CLICADA----------------------------------------------------
-   /* console.log("olá");
+    console.log("olá");
     let divClicada = document.querySelectorAll('.divClicada');
     for (let j = 0; j < divClicada.length; j++) {
-        html2canvas(divClicada[j]).then(function(canvas) {
+        html2canvas(divClicada[j]).then(function (canvas) {
             document.getElementById('result').appendChild(canvas);
 
             let cvs = document.querySelector("canvas");
@@ -345,18 +351,20 @@ function exportIcon() {
             console.log(dataURI);
         });
         document.getElementById('result').style.display = "block";
-    }*/
+    }
     //https://b.codewithsundeep.com/2022/05/convert-html-to-canvas-and-canvas-to.html
     //https://www.youtube.com/watch?v=4cFtRjF5WtM&ab_channel=CodeWithSundeep
 }
 
-//WEB API DO CONCEPT NET 
+//Web API do concept Net
 function cNet(url) {
     fetch(url).then(function (res) {
         return res.json();
     }).then(function (data) {
         for (let i = 0; i < 2; i++) {
             let word = split(data.related[i]['@id'], '/');
+            loadInfo(word[3]);
+            button.mousePressed(loadInfo(word[3]));
             const result = {
                 method: 'POST',
                 headers: {
@@ -370,3 +378,4 @@ function cNet(url) {
         console.error(err);
     })
 }
+
