@@ -209,7 +209,7 @@ function draw() {
 
 function searchConcept() {
     let values = [];
-    values.push(input.value());
+    values.push(input.value().toLowerCase());
     for (let i = 0; i < 10; i++) {
         let checkbox = select('#c' + i).elt;
         if (checkbox.checked == true) {
