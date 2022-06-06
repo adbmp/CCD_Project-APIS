@@ -51,7 +51,7 @@ function setup() {
     sideDiv.id("settings");
     sideDiv.style('width', '20vw');
     sideDiv.style('height', '100vh');
-    sideDiv.style('background-color', '#ffe61d');
+    sideDiv.style('background-color', '#FFD84F');
     //sideDiv.style('border-right', '1px solid black');
     sideDiv.style('position', 'absolute');
     //sideDiv.style('display', 'inline-block');
@@ -60,7 +60,7 @@ function setup() {
 
     textInput = createP("Nome da marca:");
     textInput.style('display', 'block');
-    textInput.style('margin', '5% 0 2% 5%');
+    textInput.style('margin', '5% 0 2% 20px');
 
     input = createInput();
     input.id("BrandInput");
@@ -68,58 +68,75 @@ function setup() {
     input.style('border-bottom', '2px solid black');
     input.style('background-color', 'transparent');
     input.style('display', 'block');
-    input.style('margin', '0 0 10% 5%');
+    input.style('margin', '0 0 10% 20px');
     inputValue = input.value();
+
+    let textCor = createP("Cor:");
+    textCor.style('display', 'block');
+    textCor.style('margin', '5% 0 2% 20px');
 
     //PickedColor = createColorPicker("#D40C3E");
     //PickedColor.style('margin', '0 0 10% 2%');
+    let colorDivDiv = createDiv();
+    colorDivDiv.id("colorDivDiv");
+    colorDivDiv.style('display', 'flex');
+    colorDivDiv.style('flex-direction', 'row');
+
+    let colorDiv = createDiv();
+    colorDiv.id("colorDiv");
+    colorDiv.style('display', 'inline-block');
+    colorDiv.style('margin-left', '20px');
 
     //INPUT SLIDE SATURATION
     textInputSaturation = createP("Saturation:");
     textInputSaturation.style('font-size', '15px');
     textInputSaturation.style('display', 'block');
-    textInputSaturation.style('margin', '2% 0 2% 5%');
+    textInputSaturation.style('margin', '2% 0 2% 0');
     inputSaturation = createSlider(0, 255, 0);
     inputSaturation.style('display', 'block');
-    inputSaturation.style('margin', '2% 0 10% 5%');
+    inputSaturation.style('margin', '2% 0 10% 0');
     //createSlider(min, max, [value], [step])
 
     //INPUT SLIDE BRIGHTNESS
     textInputBrightness = createP("Brightness:");
     textInputBrightness.style('font-size', '15px');
     textInputBrightness.style('display', 'block');
-    textInputBrightness.style('margin', '2% 0 2% 5%');
+    textInputBrightness.style('margin', '2% 0 2% 0');
     inputBrightness = createSlider(0, 255, 0);
     inputBrightness.style('display', 'block');
-    inputBrightness.style('margin', '2% 0 10% 5%');
+    inputBrightness.style('margin', '2% 0 10% 0');
 
     //INPUT SLIDE HUE
     textInputHue = createP("Hue:");
     textInputHue.style('font-size', '15px');
     textInputHue.style('display', 'block');
-    textInputHue.style('margin', '2% 0 2% 5%');
+    textInputHue.style('margin', '2% 0 2% 0');
     inputHue = createSlider(0, 360, 0);
     inputHue.style('display', 'block');
-    inputHue.style('margin', '2% 0 10% 5%');
+    inputHue.style('margin', '2% 0 10% 0');
 
     imageCircle = createImg(
         'images/circle.png',
         'circle1'
     );
 
-    imageCircle.style('margin', '10% 0 10% 5%');
-    imageCircle.style('display', 'block');
+    //imageCircle.style('margin', '10% 0 10% 5%');
+    imageCircle.style('display', 'inline-block');
     imageCircle.style('width', '50px');
     imageCircle.style('height', 'auto');
+    imageCircle.style('margin', 'auto');
 
     button = createButton('Generate');
     button.id("submit");
     button.value("Submit");
     button.mousePressed(loadInfo);
     button.style('display', 'block');
+    button.style('position', 'absolute');
+    button.style('left', '20px');
+    button.style('bottom', '20px');
     button.style('margin', '5%');
     button.style('padding', '10px');
-    button.style('backgroundColor', '#F4F4F4');
+    button.style('backgroundColor', '#FFF5D3');
     button.style('shadow', '0 2px 2px rgba(0, 0, 0, 0.25)');
     button.style('border', 'none');
     button.style('cursor', 'pointer');
@@ -135,21 +152,26 @@ function setup() {
 
     containerC = createDiv();
     containerC.style('width', '60vw');
-    containerC.style('height', '100vh');
+    containerC.style('height', 'auto');
     containerC.style('position', 'relative');
     containerC.style('left', '50%');
-    containerC.style('transform', 'translateX(-50%)');
+    containerC.style('top', '50%');
+    containerC.style('transform', 'translateX(-50%) translateY(-50%)');
 
     textInput.parent(sideDiv);
     input.parent(sideDiv);
 
-    textInputSaturation.parent(sideDiv);
-    inputSaturation.parent(sideDiv);
-    textInputBrightness.parent(sideDiv);
-    inputBrightness.parent(sideDiv);
-    textInputHue.parent(sideDiv);
-    inputHue.parent(sideDiv);
-    imageCircle.parent(sideDiv);
+    textCor.parent(sideDiv);
+    textInputSaturation.parent(colorDiv);
+    inputSaturation.parent(colorDiv);
+    textInputBrightness.parent(colorDiv);
+    inputBrightness.parent(colorDiv);
+    textInputHue.parent(colorDiv);
+    inputHue.parent(colorDiv);
+    colorDiv.parent(colorDivDiv);
+    imageCircle.parent(colorDivDiv);
+    colorDivDiv.parent(sideDiv);
+
 
     //PickedColor.parent(sideDiv);
     button.parent(sideDiv);
@@ -280,7 +302,7 @@ function drawIcon(url) {
     buttonExport.style('right', '20px');
     buttonExport.style('bottom', '20px');
     buttonExport.style('padding', '10px');
-    buttonExport.style('backgroundColor', '#F4F4F4');
+    buttonExport.style('backgroundColor', '#FFF5D3');
     buttonExport.style('shadow', '0 2px 2px rgba(0, 0, 0, 0.25)');
     buttonExport.style('border', 'none');
     buttonExport.style('cursor', 'pointer');

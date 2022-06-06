@@ -35,6 +35,8 @@
             
             let label = document.createElement('label');
             label.setAttribute('for', 'c' + num);
+            label.innerText= value;
+            label.style.display='block';
 
             let input = document.createElement('input');
             input.setAttribute('id', 'c' + num);
@@ -44,7 +46,10 @@
             input.innerText = value;
 
             label.appendChild(input);
-            document.querySelector('#categories').appendChild(label);
+            let categoriesDiv = document.querySelector('#categories');
+            //categoriesDiv.appendChild(label);
+            let sideDiv1 = document.getElementById('settings');
+            //sideDiv1.appendChild(categoriesDiv);
         }
 
         let btn = document.createElement('button');
@@ -64,7 +69,7 @@
             }
         });
     </script>
-<div id="result"><a href=""><button>Download JPG</button></a></div>
+<div id="result" style="display: none"><a href=""><button>Download JPG</button></a></div>
 </body>
 
 </html>
