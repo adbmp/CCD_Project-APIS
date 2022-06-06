@@ -3,6 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="3c9e8b90-8a11-476b-89dc-118da2dca125" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ccd_project/public/css/index.css" beforeDir="false" afterPath="$PROJECT_DIR$/ccd_project/public/css/index.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ccd_project/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/ccd_project/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ccd_project/public/js/api_google_fonts.js" beforeDir="false" afterPath="$PROJECT_DIR$/ccd_project/public/js/api_google_fonts.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ccd_project/public/js/logo_maker.js" beforeDir="false" afterPath="$PROJECT_DIR$/ccd_project/public/js/logo_maker.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -82,7 +85,7 @@
       <workItem from="1654513863673" duration="21501000" />
       <workItem from="1654550838528" duration="986000" />
       <workItem from="1654552256424" duration="176000" />
-      <workItem from="1654553062535" duration="310000" />
+      <workItem from="1654553062535" duration="1251000" />
     </task>
     <servers />
   </component>
@@ -94,16 +97,5 @@
       <screen x="0" y="23" width="1440" height="833" />
     </state>
     <state x="698" y="360" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1440.833@0.23.1440.833" timestamp="1654537021624" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/ccd_project/public/js/logo_maker.js</url>
-          <line>53</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>

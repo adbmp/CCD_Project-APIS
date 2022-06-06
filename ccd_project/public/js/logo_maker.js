@@ -1,17 +1,8 @@
-//TEXT
-/*var font;
-var textSize;
-var textLogo;
-var textW;
-var xText;
-var yText;*/
-
-//---------------
-//NOVO
 let boxArea;
 let iconSelect;
 let buttonExport;
-//NOVO
+
+//TEXT
 let text;
 let textText;
 let sText;
@@ -20,13 +11,12 @@ let yText;
 let fText;
 let cText;
 let fontFamilyA = ["Nuosu SIL", "Cormorant Garamond", "Antic Slab", "Joan", "Roboto", "Open Sans", "Montserrat", "Oxygen", "Oleo Script", "Lobster", "Special Elite", "Rubik Microbe", "Amatic SC", "Pacifico", "Kaushan Script", "Berkshire Swash", "Inconsolata", "Cutive Mono", "Roboto Mono", "Space Mono"];
-//NOVO
+
+//ICON
 let icon;
-let urlIcon;
 let wIcon;
 let xIcon;
 let yIcon;
-//---------------
 
 //INPUT
 let textInput;
@@ -46,25 +36,16 @@ let brightnessCircle = 0;
 let hueRotateCircle = 0;
 
 //LOGOS
-//let icon;
 let button;
 let sideDiv;
 let container;
 let containerC;
 let inputValue;
 
-function preload() {
-
-    // httpGet('https://api.conceptnet.io/related/c/en/'+inputValue+'?filter=/c/en', 'json', false, function(data){
-    // for(let i =0; i <5; i++){     
-    // console.log(data.related[i]);
-    // }
-    //  });
-}
-
 function setup() {
     stroke(255);
     frameRate(30);
+
     //Barra lateral
     sideDiv = createDiv();
     sideDiv.id("settings");
@@ -135,7 +116,6 @@ function setup() {
         'circle1'
     );
 
-    //imageCircle.style('margin', '10% 0 10% 5%');
     imageCircle.style('display', 'inline-block');
     imageCircle.style('width', '50px');
     imageCircle.style('height', 'auto');
@@ -197,13 +177,9 @@ function setup() {
 function draw() {
     button.mousePressed(searchConcept);
 
-    //console.log(inputSaturation.value());
     saturateCircle = inputSaturation.value();
-    //console.log(inputBrightness.value());
     brightnessCircle = inputBrightness.value();
-    //console.log(inputHue.value());
     hueRotateCircle = inputHue.value();
-
     imageCircle.style('filter', 'invert(0.5) sepia(100%) saturate(' + saturateCircle + '%) hue-rotate(' + hueRotateCircle + 'deg) brightness(' + brightnessCircle + '%)');
 }
 
@@ -217,7 +193,7 @@ function searchConcept() {
             for (let j = 0; j < values.length; j++) {
                 cNet('https://api.conceptnet.io/related/c/en/' + values[j] + '?filter=/c/en');
             }
-        };
+        }
         cNet('https://api.conceptnet.io/related/c/en/' + input.value() + '?filter=/c/en');
     }
 }
@@ -328,7 +304,6 @@ function drawButtonExport() {
     buttonExport.id("export");
     buttonExport.value("Submit");
     buttonExport.mousePressed(saveInfo);
-    //buttonExport.style('display', 'block');
     buttonExport.style('position', 'fixed');
     buttonExport.style('right', '20px');
     buttonExport.style('bottom', '20px');
@@ -340,93 +315,6 @@ function drawButtonExport() {
     buttonExport.parent(containerC);
 }
 
-/*
-function drawIcon(url) {
-    let boxArea = createDiv();
-    let icon = createImg(url);
-    let text = createP(input.value());
-    text.style('margin', 0);
-
-    boxArea.class('genBox');
-    boxArea.style('width', '100px');
-    boxArea.style('height', '100px');
-    boxArea.style('position', 'relative');
-    boxArea.style('display', 'inline-block');
-    boxArea.style('margin', '4%');
-    boxArea.style('background-color', 'white');
-    boxArea.style('border', '1px solid black');
-
-    colorMode(HSB, 255);
-
-    icon.style('filter', 'invert(0.5) sepia(100%) saturate(' + saturateCircle + '%) hue-rotate(' + hueRotateCircle + 'deg) brightness(' + brightnessCircle + '%)');
-
-    let wIcon = random(50, 100);
-    icon.style('width', wIcon + '%');
-    icon.style('height', 'auto');
-    let xIcon = random(0, boxArea.width - wIcon);
-    let yIcon = random(10, boxArea.height - icon - height);
-    icon.position(xIcon, yIcon);
-
-    let textSize = 16;
-    let textW = textWidth(text);
-    xText = random(0, boxArea.width - textW);
-    yText = random(10, boxArea.height - textSize);
-    text.position(xText, yText);
-
-    let randomFontF = getRandomFamilyFont();
-    console.log("randomFontF " + randomFontF);
-    let randomFontCategory = getCategoryRandomFont();
-    console.log("randomFontCategory " + randomFontCategory);
-    text.style('font-family', "'" + randomFontF + "'" + ', ' + randomFontCategory);
-    console.log('font-family', "'" + randomFontF + "'" + ', ' + randomFontCategory);
-    text.style('src', 'url(' + getFileRandomFont() + ') format(ttf)');
-    console.log('src', 'url(' + getFileRandomFont() + ') format(ttf)');
-    text.style('font-weight', '400');
-    text.style('font-style', 'normal'); //italic
-    text.style('font-size', textSize + 'px');
-
-    text.style('color', 'white');
-    text.style('text-shadow', '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000');
-
-    if (brightnessCircle !== 0) {
-        text.style('color', 'black');
-        text.style('text-shadow', 'none');
-    }
-
-    buttonExport = createButton('Export');
-    buttonExport.id("export");
-    buttonExport.value("Submit");
-    buttonExport.mousePressed(exportIcon);
-    buttonExport.style('position', 'absolute');
-    buttonExport.style('right', '20px');
-    buttonExport.style('bottom', '20px');
-    buttonExport.style('padding', '10px');
-    buttonExport.style('background-color', '#FFF5D3');
-    buttonExport.style('border', 'none');
-    buttonExport.style('cursor', 'pointer');
-
-    icon.parent(boxArea);
-    text.parent(boxArea);
-    buttonExport.parent(container);
-    boxArea.parent(containerC);
-
-    //SELECIONAR DIV CLICADA----------------------------------------------------
-    let iconSelect = document.querySelectorAll('.genBox');
-    let nClick = 0;
-    for (let i = 0; i < iconSelect.length; i++) {
-        iconSelect[i].addEventListener('click', function () {
-            //iconSelect[i].style.border = '2px solid green';
-            iconSelect[i].classList.add("divClicada");
-            nClick++
-            if (nClick === 2) {
-                //iconSelect[i].style.border = 'none';
-                iconSelect[i].classList.remove("divClicada");
-                nClick = 0;
-            }
-        })
-    }
-}*/
-
 function selecionarIcons() {
     iconSelect = document.querySelectorAll('.genBox');
     let nClick = 0;
@@ -435,7 +323,6 @@ function selecionarIcons() {
             iconSelect[i].classList.add("divClicada");
             nClick++
             if (nClick === 2) {
-                //iconSelect[i].style.border = 'none';
                 iconSelect[i].classList.remove("divClicada");
                 nClick = 0;
             }
@@ -443,6 +330,7 @@ function selecionarIcons() {
     }
 }
 
+//Icon Saved
 let iconSave;
 let textSave;
 let divSave;
@@ -466,31 +354,23 @@ function saveInfo() {
         console.log(iconSave);
         console.log(textSave);
 
-        //https://zellwk.com/blog/css-values-in-js/ HOW TO GET VALUES FROM STYLE CSS DE ELEMENTO
         let xTS = textSave.style.left;
         xTextSave = xTS.substr(0, xTS.indexOf('p'));
-        //console.log('left text: ' + xTextSave);
         let tTS = textSave.style.top;
         tTextSave = tTS.substr(0, tTS.indexOf('p'));
         console.log('top text: ' + tTextSave);
         fTextSave = textSave.style.fontFamily;
-        //console.log('family text: ' + fTextSave);
 
         let xIS = iconSave.style.left;
         xIconSave = xIS.substr(0, xIS.indexOf('p'));
-        //console.log('left icon: ' + xIconSave);
         let tIS = iconSave.style.top;
         tIconSave = tIS.substr(0, tIS.indexOf('p'));
-        //console.log('top icon: ' + tIconSave);
         let wIS = iconSave.style.width;
         wIconSave = wIS.substr(0, wIS.indexOf('%'));
-        //console.log('width icon: ' + wIconSave);
         hIconSave = iconSave.style.height;
-        //console.log('height icon: ' + hIconSave);
         urlIconSave = iconSave.src;
-
     }
-    canvasExport();
+    //canvasExport();
 }
 
 /*function canvasExport() {
@@ -540,8 +420,6 @@ function saveInfo() {
             });
             document.getElementById('result').style.display = "block";
         }
-    //https://b.codewithsundeep.com/2022/05/convert-html-to-canvas-and-canvas-to.html
-    //https://www.youtube.com/watch?v=4cFtRjF5WtM&ab_channel=CodeWithSundeep
 }*/
 
 
