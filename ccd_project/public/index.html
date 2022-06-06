@@ -32,11 +32,9 @@
         }
 
         function checkbox(num, value) {
-            
-            let label = document.createElement('label');
-            label.setAttribute('for', 'c' + num);
-            label.innerText= value;
-            label.style.display='block';
+
+            let divInputCategory = document.createElement('div');
+            divInputCategory.setAttribute('class', 'divInputCategory');
 
             let input = document.createElement('input');
             input.setAttribute('id', 'c' + num);
@@ -44,15 +42,25 @@
             input.setAttribute('name', 'category');
             input.setAttribute('value', value);
             input.innerText = value;
+            input.style.display='inline-block';
+            input.style.marginRight='10px';
 
-            label.appendChild(input);
+            let label = document.createElement('label');
+            label.setAttribute('for', 'c' + num);
+            let valueUp = value.charAt(0).toUpperCase()+ value.slice(1);
+            console.log(value.charAt(0).toUpperCase()+ value.slice(1));
+            label.innerText= valueUp;
+            label.style.display='inline-block';
+
+            divInputCategory.appendChild(input);
+            divInputCategory.appendChild(label);
             let categoriesDiv = document.querySelector('#categories');
-            categoriesDiv.appendChild(label);
+            categoriesDiv.appendChild(divInputCategory);
             let sideDiv1 = document.getElementById('settings');
             //sideDiv1.appendChild(categoriesDiv);
         }
     </script>
-<div id="result" style="display: block"><a href=""><button>Download JPG</button></a></div>
+<div id="result" style="display: block"><a href=""><button id="buttonResult">Download JPG</button></a></div>
 </body>
 
 </html>

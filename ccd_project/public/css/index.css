@@ -15,21 +15,30 @@ body {
 
 #categories {
     position: absolute;
-    top: 43%;
+    top: 40%;
     z-index: 1;
-    width: 20%;
-    display: inline-block;
-    left: 2%;
+    display: block;
+    left: 20px;
 }
 
 #result {
     position: absolute;
     right: 20px;
     bottom: 100px;
+    z-index: 1;
 }
-
+#buttonResult{
+    padding: 10px;
+    background-color: #FFF5D3;
+    box-shadow:0 2px 2px rgba(0, 0, 0, 0.25);
+    border: none;
+    cursor: pointer;
+}
 #result>a {
     display: block;
+}
+#export{
+    box-shadow:0 2px 2px rgba(0, 0, 0, 0.25);
 }
 
 /* #settings{

@@ -58,7 +58,7 @@ function setup() {
     sideDiv.style('top', '0');
     sideDiv.style('left', '0');
 
-    textInput = createP("Nome da marca:");
+    textInput = createP("Brands Name:");
     textInput.style('display', 'block');
     textInput.style('margin', '5% 0 2% 20px');
 
@@ -71,7 +71,7 @@ function setup() {
     input.style('margin', '0 0 10% 20px');
     inputValue = input.value();
 
-    let textCor = createP("Cor:");
+    let textCor = createP("Color:");
     textCor.style('display', 'block');
     textCor.style('margin', '5% 0 2% 20px');
 
@@ -133,10 +133,9 @@ function setup() {
     button.style('position', 'absolute');
     button.style('left', '20px');
     button.style('bottom', '20px');
-    button.style('margin', '5%');
     button.style('padding', '10px');
     button.style('backgroundColor', '#FFF5D3');
-    button.style('shadow', '0 2px 2px rgba(0, 0, 0, 0.25)');
+    button.style('box-shadow', '0 2px 2px rgba(0, 0, 0, 0.25)');
     button.style('border', 'none');
     button.style('cursor', 'pointer');
 
@@ -227,6 +226,7 @@ function drawIcon(url) {
     let boxArea = createDiv();
     let icon = createImg(url);
     let text = createP(input.value());
+    text.style('margin', 0);
 
     boxArea.class('genBox');
     boxArea.style('width', '100px');
@@ -273,9 +273,8 @@ function drawIcon(url) {
 
     let textSize = 16;
     let textW = textWidth(text);
-    let textH = textSize;
     xText = random(0, boxArea.width - textW);
-    yText = random(10, boxArea.height - textH);
+    yText = random(10, boxArea.height - textSize);
     text.position(xText, yText);
 
     let randomFontF = getRandomFamilyFont();
@@ -308,8 +307,7 @@ function drawIcon(url) {
     buttonExport.style('right', '20px');
     buttonExport.style('bottom', '20px');
     buttonExport.style('padding', '10px');
-    buttonExport.style('backgroundColor', '#FFF5D3');
-    buttonExport.style('shadow', '0 2px 2px rgba(0, 0, 0, 0.25)');
+    buttonExport.style('background-color', '#FFF5D3');
     buttonExport.style('border', 'none');
     buttonExport.style('cursor', 'pointer');
 
