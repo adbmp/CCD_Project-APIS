@@ -1,9 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Hello!</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -37,58 +40,42 @@
     <link id="linkHead">
 
     <link rel="stylesheet" href="../css/index.css">
-
     <script src="https://cdn.jsdelivr.net/npm/p5@1.3.1/lib/p5.js"></script>
-
-<!--<script src="js/html2canvas.js"></script>
-<script src="js/html2canvas.min.js"></script>-->
 </head>
 
-<body id="boDy">
+<body style="background-color: #FCD650;">
+    
+    <div class="anim">
+        <span class="Osw">Hello, I'm LogoMaker!</span>
+        <br>
+        <span class="Osw">Let's make a logo together.</span>
+        <img onclick="next(0,1)" id="arrow" src="./images/Seta.svg" width="5%" height="auto">
+    </div>
 
-    <div id="categories"></div>
+    <div class="anim">
+        <span class="Snd">First, tell me the name</span>
+        <br>
+        <span class="Snd">of your brand.</span>
+        <img onclick="next(1,2)" class = "Snd" id="arrow1" src="./images/Seta.svg" width="5%" height="auto">
+    </div>
 
-    <!--<script type="text/javascript" src="/js/api_google_fonts.js"></script>-->
-    <script type="text/javascript" src="/js/logo_maker.js"></script>
-    <script>
-        let categories = ['art','textile', 'technology', 'design', 'sports', 'nature', 'company',
-            'food', 'culinary', 'travel', 'hospitality', 'education', 'music'];
+    <div class="anim">
+        <span class="Snd">Now, describe your brand</span>
+        <br>
+        <span class="Snd">with 1 to 5 words.</span>
+        <img onclick="next(2,3)" class = "Snd" id="arrow1" src="./images/Seta.svg" width="5%" height="auto">
+    </div>
 
-        for (let i = 0; i < categories.length; i++) {
-            checkbox(i, categories[i]);
-        }
+    <div class="anim">
+        <span class="Snd">Ta-da! Here it is:</span>
+        <br>
+        <span class="Snd" style="font-size: 20px; width: 23%; top:12%; cursor: pointer;">Select those you like the most and click Generate to create some more or click Export to download those you like.</span>
+        <span class="Snd" style="bottom: 0; cursor: pointer;">RESET</span>
+        <span class="Snd" style="bottom: 0; cursor: pointer; left: 31.5%">EXPORT</span>
+        <span onclick="evolveLogos()" class="Snd" style="bottom: 0;  cursor: pointer; left: 64.5%">GENERATE</span>
+    </div>
 
-        function checkbox(num, value) {
-
-            let divInputCategory = document.createElement('div');
-            divInputCategory.setAttribute('class', 'divInputCategory');
-
-            let input = document.createElement('input');
-            input.setAttribute('id', 'c' + num);
-            input.setAttribute('type', 'checkbox');
-            input.setAttribute('name', 'category');
-            input.setAttribute('value', value);
-            input.innerText = value;
-            input.style.display='inline-block';
-            input.style.margin='0px';
-            input.style.marginRight='10px';
-
-            let label = document.createElement('label');
-            label.setAttribute('for', 'c' + num);
-            let valueUp = value.charAt(0).toUpperCase()+ value.slice(1);
-            console.log(value.charAt(0).toUpperCase()+ value.slice(1));
-            label.innerText= valueUp;
-            label.style.display='inline-block';
-
-            divInputCategory.appendChild(input);
-            divInputCategory.appendChild(label);
-            let categoriesDiv = document.querySelector('#categories');
-            categoriesDiv.appendChild(divInputCategory);
-            let sideDiv1 = document.getElementById('settings');
-        }
-    </script>
-<!--<canvas id="myCanvas"></canvas>
-<div id="result"><a href=""><button id="buttonResult">Download JPG</button></a></div>-->
+    <script type="text/javascript" src="./js/logo_maker.js"></script>
 </body>
 
 </html>

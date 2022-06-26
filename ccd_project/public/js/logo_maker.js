@@ -1,3 +1,9 @@
+
+//Interface 
+
+
+//Logo
+
 let boxArea;
 let iconSelect;
 let buttonExport;
@@ -38,9 +44,13 @@ let hueRotateCircle = 0;
 //LOGOS
 let button;
 let sideDiv;
+let txtInputDiv;
+let txtInputDiv2;
 let container;
 let containerC;
 let inputValue;
+let description;
+let descValue;
 
 function setup() {
     stroke(255);
@@ -49,6 +59,7 @@ function setup() {
     //Barra lateral
     sideDiv = createDiv();
     sideDiv.id("settings");
+    sideDiv.style('display', 'none');
     sideDiv.style('width', '20vw');
     sideDiv.style('height', '100vh');
     sideDiv.style('background-color', '#FFD84F');
@@ -56,17 +67,28 @@ function setup() {
     sideDiv.style('top', '0');
     sideDiv.style('left', '0');
 
-    textInput = createP("Brands Name:");
-    textInput.style('display', 'block');
-    textInput.style('margin', '5% 0 2% 20px');
-
     input = createInput();
-    input.id("BrandInput");
+    input.class("Snd");
     input.style('border', 'none');
     input.style('border-bottom', '2px solid black');
     input.style('background-color', 'transparent');
+    input.style('width', '32%');
     input.style('display', 'block');
-    input.style('margin', '0 0 10% 20px');
+    input.style('top', '25%');
+    input.style('color', '#000000a1');
+
+
+    description = createInput();
+    description.class("Snd");
+    description.style('border', 'none');
+    description.style('border-bottom', '2px solid black');
+    description.style('background-color', 'transparent');
+    description.style('width', '32%');
+    description.style('display', 'block');
+    description.style('top', '25%');
+    description.style('color', '#000000a1');
+
+    descValue = description.value();
     inputValue = input.value();
 
     let textCor = createP("Color:");
@@ -137,7 +159,7 @@ function setup() {
     button.style('box-shadow', '0 2px 2px rgba(0, 0, 0, 0.25)');
     button.style('border', 'none');
     button.style('cursor', 'pointer');
-    drawButtonExport();
+    // drawButtonExport();
 
     //Container do conjunto de logos criados
     container = createDiv();
@@ -155,8 +177,11 @@ function setup() {
     containerC.style('left', '50%');
     containerC.style('transform', 'translateX(-50%)');
 
-    textInput.parent(sideDiv);
-    input.parent(sideDiv);
+    txtInputDiv = selectAll('.anim')[1].elt;
+    input.parent(txtInputDiv);
+
+    txtInputDiv2 = selectAll('.anim')[2].elt;
+    description.parent(txtInputDiv2);
 
     textCor.parent(sideDiv);
     textInputSaturation.parent(colorDiv);
@@ -176,37 +201,44 @@ function setup() {
 
 function draw() {
     button.mousePressed(searchConcept);
-
     saturateCircle = inputSaturation.value();
     brightnessCircle = inputBrightness.value();
     hueRotateCircle = inputHue.value();
-    imageCircle.style('filter', 'invert(0.5) sepia(100%) saturate(' + saturateCircle + '%) hue-rotate(' + hueRotateCircle + 'deg) brightness(' + brightnessCircle + '%)');
+    imageCircle.style('filter', 'invert(0.5) sepia(100%) saturate(' + random(0,255) + '%) hue-rotate(' + random(0,255) + 'deg) brightness(' + random(0,255) + '%)');
+}
+
+function next(selected, show) {
+    document.getElementsByClassName('anim')[selected].style.animation = "leave";
+    document.getElementsByClassName('anim')[selected].style.display = "none";
+    document.getElementsByClassName('anim')[show].style.display = "block";
+
+    if (selected == 2) {
+        document.getElementsByClassName('anim')[selected].style.display = "none";
+        searchConcept();
+    }
 }
 
 function searchConcept() {
     let values = [];
-    values.push(input.value().toLowerCase());
-    for (let i = 0; i < 10; i++) {
-        let checkbox = select('#c' + i).elt;
-        if (checkbox.checked == true) {
-            values.push(checkbox.value);
-            for (let j = 0; j < values.length; j++) {
-                cNet('https://api.conceptnet.io/related/c/en/' + values[j] + '?filter=/c/en');
-            }
-        }
-        cNet('https://api.conceptnet.io/related/c/en/' + input.value() + '?filter=/c/en');
-    }
+    let splited = split(description.value(), ',');
+    for (let i = 0 ; i<splited.length; i++) { 
+    values.push(splited[i].toLowerCase());
+    cNet('https://api.conceptnet.io/related/c/en/' + splited[i] + '?filter=/c/en&limit=2');
+}
 }
 
-//Load info do APK
+//Load info do API
+let rand;
+
 function loadInfo(result) {
     fetch('/' + result).then(function (res) {
         return res.json();
     }).then(function (data) {
         console.log(data);
-         data.forEach(function (el) {
-            drawIcon(el.preview_url);
-         });
+        for (let i = 0; i < 20; i++) {
+            rand = int(random(0, data.length));
+            drawIcon(data[rand].preview_url);
+        }
     }).catch(function (err) {
         console.error(err);
     })
@@ -234,6 +266,28 @@ function cNet(url) {
     })
 }
 
+
+function drawIcon(url) {
+    for (let i = 0; i < 1; i++) {
+        wIcon = random(20, width);
+        xIcon = random(0, 100 - wIcon);
+        yIcon = random(10, 100 - wIcon);
+        sText = 16;
+        let textW = textWidth(text);
+        xText = random(0, 100 - textW);
+        yText = random(10, 100 - 25);
+
+        let randomFontIndex = Math.floor(Math.random() * fontFamilyA.length);
+        for (let j = 0; j < fontFamilyA.length; j++) {
+            fText = fontFamilyA[randomFontIndex];
+        }
+
+        cText = "black";
+
+        new drawIconClass(url, xIcon, yIcon, wIcon, textText, sText, xText, yText, fText, cText);
+    }
+}
+
 class drawIconClass {
     constructor(urlIconC, xIconC, yIconC, wIconC, textTextC, sTextC, xTextC, yTextC, fTextC, cTextC) {
         boxArea = createDiv();
@@ -253,7 +307,7 @@ class drawIconClass {
         icon.style('width', wIconC + '%');
         icon.style('height', 'auto');
         icon.position(xIconC, yIconC);
-        icon.style('filter', 'invert(0.5) sepia(100%) saturate(' + saturateCircle + '%) hue-rotate(' + hueRotateCircle + 'deg) brightness(' + brightnessCircle + '%)');
+        icon.style('filter', 'invert(0.5) sepia(100%) saturate(' + random(0,255) + '%) hue-rotate(' + random(0,255) + 'deg) brightness(' + random(0,255) + '%)');
 
         text = createP(input.value());
         text.style('font-family', fTextC);
@@ -330,97 +384,3 @@ function selecionarIcons() {
         })
     }
 }
-
-//Icon Saved
-let iconSave;
-let textSave;
-let divSave;
-
-let xTextSave;
-let tTextSave;
-let fTextSave;
-let xIconSave;
-let tIconSave;
-let wIconSave;
-let hIconSave;
-let urlIconSave;
-
-function saveInfo() {
-    divSave = document.querySelectorAll('.divClicada');
-    for (let i = 0; i < divSave.length; i++) {
-        console.log(divSave[i]);
-
-        iconSave = document.querySelector('.divClicada>img');
-        textSave = document.querySelector('.divClicada>p');
-        console.log(iconSave);
-        console.log(textSave);
-
-        let xTS = textSave.style.left;
-        xTextSave = xTS.substr(0, xTS.indexOf('p'));
-        let tTS = textSave.style.top;
-        tTextSave = tTS.substr(0, tTS.indexOf('p'));
-        console.log('top text: ' + tTextSave);
-        fTextSave = textSave.style.fontFamily;
-
-        let xIS = iconSave.style.left;
-        xIconSave = xIS.substr(0, xIS.indexOf('p'));
-        let tIS = iconSave.style.top;
-        tIconSave = tIS.substr(0, tIS.indexOf('p'));
-        let wIS = iconSave.style.width;
-        wIconSave = wIS.substr(0, wIS.indexOf('%'));
-        hIconSave = iconSave.style.height;
-        urlIconSave = iconSave.src;
-    }
-    //canvasExport();
-}
-
-/*function canvasExport() {
-    console.clear();
-    console.log('left text: ' + xTextSave);
-    console.log('top text: ' + tTextSave);
-    console.log('family text: ' + fTextSave);
-    console.log('left icon: ' + xIconSave);
-    console.log('top icon: ' + tIconSave);
-    console.log('width icon: ' + wIconSave);
-    console.log('height icon: ' + hIconSave);
-    console.log('url icon: ' + urlIconSave);
-    console.log(input.value());
-
-    var c = document.getElementById("myCanvas");
-    var ctx = c.getContext("2d");
-    console.log(ctx.font = "16px "+fTextSave);
-    ctx.font = "16px "+fTextSave
-    ctx.fillText(input.value(), xTextSave, 50);
-
-    //https://www.html5canvastutorials.com/tutorials/html5-canvas-image-size/
-    let imageObj = new Image();
-    imageObj.onload = function() {
-        console.log("imageObj.width " + imageObj.width);
-        console.log("wIconSave " + wIconSave);
-        ctx.drawImage(imageObj, xIconSave, tIconSave, imageObj.width/2, imageObj.height/2);
-    };
-    imageObj.src = urlIconSave;
-
-    //let img = document.getElementsByClassName("icon")[0];
-    //ctx.drawImage(img,xIconSave, tIconSave);
-}*/
-
-/*function exportIcon() {
-    //EXPORTAR DIV CLICADA----------------------------------------------------
-        let divClicada = document.querySelectorAll('.divClicada');
-        for (let j = 0; j < divClicada.length; j++) {
-            html2canvas(divClicada[j]).then(function (canvas) {
-                document.getElementById('result').appendChild(canvas);
-
-                let cvs = document.querySelector("canvas");
-                let dataURI = cvs.toDataURL("image/jpeg");
-                let downloadLink = document.querySelector("#result>a");
-                downloadLink.href = dataURI;
-                downloadLink.download = "div2canvasimage.jpg";
-                console.log(dataURI);
-            });
-            document.getElementById('result').style.display = "block";
-        }
-}*/
-
-

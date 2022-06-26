@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald&display=swap');
+
 body {
     margin: 0;
     font-family: 'Poppins', sans-serif;
@@ -6,18 +8,118 @@ body {
     flex-direction: row;
     background-color: #FAFAFA;
 }
-.main{
+
+.main {
     width: 100vw;
     height: 100vh;
 }
-#myCanvas{
+
+canvas{
+    display: block !important;
+}
+
+#myCanvas {
     position: absolute;
     left: 500px;
-    top:500px;
+    top: 500px;
     z-index: 1;
     border: 1px solid black;
     width: 100px;
     height: 100px;
+}
+
+@keyframes slide {
+    0% {
+        opacity: 0;
+        left: -100%;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes showTxt {
+    0% {
+        opacity: 0;
+        top: 0%;
+    }
+
+    100% {
+        opacity: 1;
+        top: 10%;
+    }
+}
+
+@keyframes showArrow {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+        top: 24%;
+    }
+}
+
+@keyframes leave {
+    0% {
+        left: 2%;
+    }
+
+    100%{
+        left:100%;
+    }
+
+}
+
+.anim:nth-of-type(2), .anim:nth-of-type(3), .anim:nth-of-type(4) {
+    display: none;
+}
+
+
+
+
+.Osw, .Snd {
+    font-family: 'Oswald', sans-serif;
+    font-size: 60px;
+    position: absolute;
+}
+
+.Osw:nth-of-type(1){
+    animation: slide 3s ease-out forwards;
+    left: 2%;
+}
+
+.Snd {
+    animation: slide 2s forwards;
+    left: 2%;
+}
+
+.Snd:nth-of-type(2){
+    top: 10%;
+    opacity: 1;
+}
+
+.Osw:nth-of-type(2) {
+    opacity: 0;
+    left: 2%;
+    animation: showTxt 2s 3s ease-out forwards;
+}
+
+#arrow {
+    opacity: 0;
+    position: absolute;
+    left: 2%;
+    top: 15%;
+    animation: showArrow 1s 5s ease-out forwards;
+}
+
+#arrow1{
+    position: absolute;
+    left: 36%;
+    top: 33%;   
+    z-index: 1;
 }
 
 .divClicada {
@@ -40,21 +142,24 @@ body {
     z-index: 1;
 }
 
-#buttonResult{
+#buttonResult {
     padding: 10px;
     background-color: #FFF5D3;
-    box-shadow:0 2px 2px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
     border: none;
     cursor: pointer;
 }
+
 #result>a {
     display: block;
 }
-#export{
-    box-shadow:0 2px 2px rgba(0, 0, 0, 0.25);
+
+#export {
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.25);
     z-index: 1;
 }
-#inputSaturation::-webkit-slider-thumb{
+
+#inputSaturation::-webkit-slider-thumb {
     -webkit-appearance: none;
     background-color: black;
 }
