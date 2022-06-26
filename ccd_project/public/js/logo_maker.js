@@ -307,7 +307,8 @@ class drawIconClass {
         icon.style('width', wIconC + '%');
         icon.style('height', 'auto');
         icon.position(xIconC, yIconC);
-        icon.style('filter', 'invert(0.5) sepia(100%) saturate(' + random(0,255) + '%) hue-rotate(' + random(0,255) + 'deg) brightness(' + random(0,255) + '%)');
+        let bright = int(random(0,255));
+        icon.style('filter', 'invert(0.5) sepia(100%) saturate(' + random(0,255) + '%) hue-rotate(' + random(0,255) + 'deg) brightness('+ bright + '%)');
 
         text = createP(input.value());
         text.style('font-family', fTextC);
@@ -320,7 +321,7 @@ class drawIconClass {
         text.style('color', 'white');
         text.style('text-shadow', '-1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000');
 
-        if (brightnessCircle !== 0) {
+        if (bright !== 0) {
             text.style('color', 'black');
             text.style('text-shadow', 'none');
         }
