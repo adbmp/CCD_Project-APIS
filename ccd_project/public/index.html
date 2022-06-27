@@ -67,12 +67,12 @@
     </div>
 
     <div class="anim">
-        <span class="Snd">Ta-da! Here it is:</span>
+        <span class="Snd" style="position: fixed">Ta-da! Here it is:</span>
         <br>
-        <span class="Snd" style="font-size: 20px; width: 23%; top:12%; cursor: pointer;">Select those you like the most and click Generate to create some more or click Export to download those you like.</span>
-        <span class="Snd" style="bottom: 0; cursor: pointer;">RESET</span>
-        <span class="Snd" style="bottom: 0; cursor: pointer; left: 31.5%">EXPORT</span>
-        <span onclick="evolveLogos()" class="Snd" style="bottom: 0;  cursor: pointer; left: 64.5%">GENERATE</span>
+        <span class="Snd" style="font-size: 20px; width: 23%; top:12%; position: fixed">Select those you like the most and click Generate to create some more or click Export to download those you like.</span>
+        <span id="buttonReset" class="Snd" style="bottom: 0; cursor: pointer; position: fixed">RESET</span>
+        <span id="buttonExport" class="Snd" style="bottom: 10%; cursor: pointer; position: fixed">EXPORT</span>
+        <span id="buttonGenerate" onclick="evolveLogos()" class="Snd" style="bottom: 20%; cursor: pointer; position: fixed">GENERATE</span>
     </div>
 
     <script type="text/javascript" src="./js/logo_maker.js"></script>

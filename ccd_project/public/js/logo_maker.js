@@ -80,6 +80,7 @@ function setup() {
 
     description = createInput();
     description.class("Snd");
+    description.id("SndDescription");
     description.style('border', 'none');
     description.style('border-bottom', '2px solid black');
     description.style('background-color', 'transparent');
@@ -87,6 +88,8 @@ function setup() {
     description.style('display', 'block');
     description.style('top', '25%');
     description.style('color', '#000000a1');
+
+    document.getElementById("SndDescription").placeholder = "Ex: fun, nature";
 
     descValue = description.value();
     inputValue = input.value();
@@ -182,6 +185,7 @@ function setup() {
 
     txtInputDiv2 = selectAll('.anim')[2].elt;
     description.parent(txtInputDiv2);
+
 
     textCor.parent(sideDiv);
     textInputSaturation.parent(colorDiv);
